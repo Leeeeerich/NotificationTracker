@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="notifyInfo"
+            type="com.guralnya.notification_tracker.model.models.NotifyInfo" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp">
+
+        <ImageView
+            android:id="@+id/vIconApp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="ContentDescription"
+            tools:src="@drawable/ic_no_notification" />
+
+        <TextView
+            android:id="@+id/tvAppName"
+            style="@style/TextStyleTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="4dp"
+            android:text="@{notifyInfo.appName}"
+            app:layout_constraintBottom_toTopOf="@+id/tvNotifyText"
+            app:layout_constraintStart_toEndOf="@+id/vIconApp"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Viber" />
+
+        <TextView
+            android:id="@+id/tvNotifyText"
+            style="@style/TextStyleContent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="4dp"
+            android:text="@{notifyInfo.notifyText}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/vIconApp"
+            app:layout_constraintTop_toBottomOf="@+id/tvAppName"
+            tools:text="You've got 1 messages" />
+
+        <TextView
+            android:id="@+id/tvTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@+id/tvDate"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed"
+            app:time="@{notifyInfo.dateTime}"
+            tools:text="17:34" />
+
+        <TextView
+            android:id="@+id/tvDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            app:date="@{notifyInfo.dateTime}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/tvTime"
+            app:layout_constraintTop_toBottomOf="@+id/tvTime"
+            tools:text="21.02.2020" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

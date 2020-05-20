@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.home_screen.HomeFragment">
+
+        <include
+            android:id="@+id/vNoNotification"
+            layout="@layout/view_no_notification"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/vNotificationList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="112dp"
+            android:clipToPadding="false"
+            android:visibility="gone"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+        <FrameLayout
+            android:id="@+id/flBottomGradient"
+            android:layout_width="match_parent"
+            android:layout_height="112dp"
+            android:layout_gravity="bottom"
+            android:background="@drawable/background_transparent_gradient"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <ToggleButton
+                android:id="@+id/btStartTracking"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_gravity="center"
+                android:layout_marginStart="32dp"
+                android:layout_marginEnd="32dp"
+                android:background="@drawable/button_background"
+                android:checked="false"
+                android:textColor="@color/button_text_colors"
+                android:textOff="@string/start_button"
+                android:textOn="@string/stop_button" />
+        </FrameLayout>
+    </FrameLayout>
+</layout>

@@ -1,3 +1,12 @@
 <resources>
-    <string name="app_name">NotificationTracker</string>
+    <string name="app_name">Notification Tracker</string>
+
+    <string name="no_notification_yet">There aren\'t notifications yet</string>
+    <string name="start_button">start</string>
+    <string name="stop_button">stop</string>
+
+    <string name="all_title">All</string>
+    <string name="per_hour">Per hour</string>
+    <string name="per_day">Per day</string>
+    <string name="per_month">Per month</string>
 </resources>
