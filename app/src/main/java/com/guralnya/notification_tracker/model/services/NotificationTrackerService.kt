@@ -1,6 +1,5 @@
 package com.guralnya.notification_tracker.model.services
 
-import android.content.Intent
 import android.service.notification.NotificationListenerService
 import android.service.notification.StatusBarNotification
 import android.util.Log
@@ -11,7 +10,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import org.joda.time.DateTime
-import org.koin.android.ext.android.get
 import org.koin.android.ext.android.inject
 
 class NotificationTrackerService : NotificationListenerService() {
@@ -21,8 +19,6 @@ class NotificationTrackerService : NotificationListenerService() {
 
     override fun onCreate() {
         super.onCreate()
-
-        val repository: Repository = get()
         Log.e(TAG, "Service on Create")
     }
 
@@ -48,18 +44,15 @@ class NotificationTrackerService : NotificationListenerService() {
             TAG,
             "ID :" + sbn.id + "\t" + sbn.notification.tickerText + "\t" + sbn.packageName
         )
-
         GlobalScope.launch(Dispatchers.IO) {
             repository.insertNewNotify(
                 NotifyInfo(
                     0,
-                    "",
                     sbn.packageName,
                     sbn.notification.tickerText.toString(),
                     DateTime(sbn.notification.`when`)
                 )
             )
-            Log.e(TAG, "Writed = ${repository.getAllNotify().value.toString()}")
         }
     }
 
