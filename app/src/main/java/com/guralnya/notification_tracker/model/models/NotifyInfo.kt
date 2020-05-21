@@ -13,9 +13,10 @@ import org.joda.time.DateTime
 @TypeConverters(DateTimeToLong::class)
 data class NotifyInfo(
     @PrimaryKey(autoGenerate = true) val id: Long,
+    val notifyId: Int,
     val appPackageName: String,
     val notifyText: String,
-    val dateTime: DateTime
+    val dateTimeShow: DateTime
 ) {
 
     private fun getAppInfo(context: Context): ApplicationInfo? {

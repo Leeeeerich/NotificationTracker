@@ -82,7 +82,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/vIconApp"
             app:layout_constraintVertical_chainStyle="packed"
-            app:time="@{notifyInfo.dateTime}"
+            app:time="@{notifyInfo.dateTimeShow}"
             tools:text="17:34" />
 
         <TextView
@@ -90,7 +90,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            app:date="@{notifyInfo.dateTime}"
+            app:date="@{notifyInfo.dateTimeShow}"
             app:layout_constraintBottom_toBottomOf="@+id/vIconApp"
             app:layout_constraintEnd_toEndOf="@+id/tvTime"
             app:layout_constraintTop_toBottomOf="@+id/tvTime"
