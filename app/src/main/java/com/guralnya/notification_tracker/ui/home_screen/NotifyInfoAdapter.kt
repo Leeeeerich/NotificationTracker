@@ -23,19 +23,17 @@ class NotifyInfoAdapter : RecyclerView.Adapter<NotifyInfoAdapter.NotifyInfoItem>
         )
     )
 
-    override fun getItemCount(): Int {
-        TODO("Not yet implemented")
-    }
+    override fun getItemCount() = list.size
 
     override fun onBindViewHolder(holder: NotifyInfoItem, position: Int) {
-        TODO("Not yet implemented")
+        holder.bind(list[position])
     }
 
     inner class NotifyInfoItem(private val binding: ItemNotifyInfoBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind() {
-
+        fun bind(data: NotifyInfo) {
+            binding.notifyInfo = data
         }
     }
 }

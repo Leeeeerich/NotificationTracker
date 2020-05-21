@@ -9,4 +9,9 @@
     <string name="per_hour">Per hour</string>
     <string name="per_day">Per day</string>
     <string name="per_month">Per month</string>
+
+    <string name="notification_listener_service">Notification listener service</string>
+    <string name="notification_listener_service_explanation">Notification listener explanation</string>
+    <string name="yes_button">Yes</string>
+    <string name="no_button">No</string>
 </resources>

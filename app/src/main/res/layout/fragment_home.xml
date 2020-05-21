@@ -9,11 +9,12 @@
         tools:context=".ui.home_screen.HomeFragment">
 
         <include
-            android:id="@+id/vNoNotification"
+            android:id="@+id/v_empty_screen"
             layout="@layout/view_no_notification"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center" />
+            android:layout_gravity="center"
+            android:visibility="visible" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/vNotificationList"

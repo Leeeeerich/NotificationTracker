@@ -6,8 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import com.guralnya.notification_tracker.R
 import com.guralnya.notification_tracker.databinding.FragmentHomeBinding
+import org.koin.android.viewmodel.ext.android.viewModel
 
 //private const val ARG_PARAM1 = "param1"
 //private const val ARG_PARAM2 = "param2"
@@ -16,6 +18,7 @@ class HomeFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeBinding
     private lateinit var adapter: NotifyInfoAdapter
+    private val vm: HomeViewModel by viewModel()
 
 //    private var param1: String? = null
 //    private var param2: String? = null
@@ -41,6 +44,7 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         initUi()
+        observeNotifyTrackingLiveData()
     }
 
     private fun initUi() {
@@ -49,6 +53,20 @@ class HomeFragment : Fragment() {
         binding.btStartTracking.setOnClickListener {
             //TODO need implementation start/stop tracking
         }
+    }
+
+    private fun observeNotifyTrackingLiveData() {
+        vm.getNotificationsLiveData().observe(requireActivity(), Observer {
+            if (it != null) {
+                adapter.list = it.toMutableList()
+            }
+            showEmptyScreen(it.isEmpty())
+        })
+    }
+
+    private fun showEmptyScreen(isShow: Boolean) {
+        binding.vEmptyScreen.visibility = if (isShow) View.VISIBLE else View.GONE
+        binding.vNotificationList.visibility = if (isShow) View.GONE else View.VISIBLE
     }
 
     companion object {
