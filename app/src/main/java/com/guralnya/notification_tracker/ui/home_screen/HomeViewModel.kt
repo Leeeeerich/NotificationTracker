@@ -5,5 +5,6 @@ import com.guralnya.notification_tracker.model.repository.Repository
 
 class HomeViewModel(private val repository: Repository) : ViewModel() {
 
-    fun getNotificationsLiveData() = repository.getAllNotify()
+    fun getNotificationsLiveData(filterMilliseconds: Long) =
+        repository.getAllNotify(filterMilliseconds.toString())
 }

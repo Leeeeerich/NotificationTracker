@@ -7,6 +7,7 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:windowBackground">#F2F2F2</item>
+        <item name="android:popupMenuStyle">@style/PopupMenuStyle</item>
     </style>
 
     <style name="TextStyleTitle" parent="TextAppearance.AppCompat.Large">
@@ -18,4 +19,7 @@
         <item name="android:textColor">@android:color/black</item>
     </style>
 
+    <style name="PopupMenuStyle" parent="@android:style/Widget.PopupMenu">
+        <item name="android:backgroundTint">#54000000</item>
+    </style>
 </resources>

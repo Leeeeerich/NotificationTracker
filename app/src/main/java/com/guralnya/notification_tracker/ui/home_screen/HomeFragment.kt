@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.guralnya.notification_tracker.R
 import com.guralnya.notification_tracker.databinding.FragmentHomeBinding
+import com.guralnya.notification_tracker.ui.MainActivity
 import org.koin.android.viewmodel.ext.android.viewModel
 
 //private const val ARG_PARAM1 = "param1"
@@ -44,7 +45,7 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         initUi()
-        observeNotifyTrackingLiveData()
+        observeNotifyTrackingLiveData(0)
     }
 
     private fun initUi() {
@@ -55,8 +56,8 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private fun observeNotifyTrackingLiveData() {
-        vm.getNotificationsLiveData().observe(requireActivity(), Observer {
+    private fun observeNotifyTrackingLiveData(filtration: Long) {
+        vm.getNotificationsLiveData(filtration).observe(requireActivity(), Observer {
             if (it != null) {
                 adapter.list = it.toMutableList()
             }
@@ -67,6 +68,18 @@ class HomeFragment : Fragment() {
     private fun showEmptyScreen(isShow: Boolean) {
         binding.vEmptyScreen.visibility = if (isShow) View.VISIBLE else View.GONE
         binding.vNotificationList.visibility = if (isShow) View.GONE else View.VISIBLE
+    }
+
+    override fun onResume() {
+        super.onResume()
+        (activity as? MainActivity)?.filterUpdateListener = {
+            observeNotifyTrackingLiveData(it)
+        }
+    }
+
+    override fun onStop() {
+        super.onStop()
+        (activity as? MainActivity)?.filterUpdateListener = null
     }
 
     companion object {
