@@ -22,4 +22,8 @@ class HomeViewModel(
         preferencesManager.saveTrackingStatus(isTracking) //TODO redo to getting liveData from preferences
         trackingStatusLiveData.postValue(isTracking)
     }
+
+    fun init() {
+        trackingStatusLiveData.postValue(preferencesManager.getTrackingStatus())
+    }
 }

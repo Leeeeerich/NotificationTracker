@@ -39,12 +39,12 @@ class HomeFragment : Fragment() {
         observeNotifyTrackingStatus()
         observeNotifyTrackingLiveData(0)
         initUi()
+        vm.init()
     }
 
     private fun initUi() {
         adapter = NotifyInfoAdapter()
         binding.vNotificationList.adapter = adapter
-        vm.getTrackingStatus().value?.let { binding.btStartTracking.isChecked = it }
         binding.btStartTracking.setOnClickListener {
             (it as ToggleButton)
             vm.setTrackingStatus(it.isChecked)
@@ -69,6 +69,7 @@ class HomeFragment : Fragment() {
                 } else {
                     stopTracking()
                 }
+                binding.btStartTracking.isChecked = it
             }
         })
     }
