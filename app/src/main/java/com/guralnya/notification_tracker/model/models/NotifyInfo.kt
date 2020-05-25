@@ -16,6 +16,7 @@ data class NotifyInfo(
     val notifyId: Int,
     val appPackageName: String,
     val notifyText: String,
+    val isAdding: Boolean,
     val dateTimeShow: DateTime
 ) {
 

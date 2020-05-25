@@ -14,4 +14,8 @@
     <string name="notification_listener_service_explanation">Notification listener explanation</string>
     <string name="yes_button">Yes</string>
     <string name="no_button">No</string>
+
+    <string name="was_added">Was added in:</string>
+    <string name="was_removed">Was removed in:</string>
+    <string name="notify_id">Notify id = %s</string>
 </resources>

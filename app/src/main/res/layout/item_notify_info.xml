@@ -42,18 +42,30 @@
             android:ellipsize="end"
             android:maxLines="2"
             android:text="@{notifyInfo.getAppName(context)}"
-            app:layout_constraintBottom_toTopOf="@+id/tvNotifyText"
+            app:layout_constraintBottom_toTopOf="@+id/tvNotifyId"
             app:layout_constraintEnd_toStartOf="@+id/barrier"
             app:layout_constraintStart_toEndOf="@+id/vIconApp"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Viber" />
 
         <TextView
+            android:id="@+id/tvNotifyId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="@{@string/notify_id(notifyInfo.notifyId)}"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toTopOf="@+id/tvNotifyText"
+            app:layout_constraintStart_toStartOf="@+id/tvAppName"
+            app:layout_constraintTop_toBottomOf="@+id/tvAppName"
+            tools:text="Notify id = 18" />
+
+        <TextView
             android:id="@+id/tvNotifyText"
             style="@style/TextStyleContent"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="4dp"
             android:layout_marginBottom="4dp"
             android:ellipsize="end"
             android:maxLines="2"
@@ -62,7 +74,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/barrier"
             app:layout_constraintStart_toStartOf="@+id/tvAppName"
-            app:layout_constraintTop_toBottomOf="@+id/tvAppName"
+            app:layout_constraintTop_toBottomOf="@+id/tvNotifyId"
             tools:text="You've got 1 messages" />
 
         <androidx.constraintlayout.widget.Barrier
@@ -70,17 +82,29 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:barrierDirection="start"
-            app:constraint_referenced_ids="tvTime,tvDate"
+            app:constraint_referenced_ids="tvTime,tvDate, tvWasAdd"
             tools:layout_editor_absoluteX="379dp" />
+
+        <TextView
+            android:id="@+id/tvWasAdd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{notifyInfo.isAdding ? @string/was_added : @string/was_removed}"
+            android:textColor="@{notifyInfo.isAdding ? @android:color/holo_green_dark : @android:color/holo_orange_dark}"
+            app:layout_constraintBottom_toTopOf="@+id/tvTime"
+            app:layout_constraintEnd_toEndOf="@+id/tvTime"
+            app:layout_constraintTop_toTopOf="@+id/vIconApp"
+            tools:text="Was added in:" />
 
         <TextView
             android:id="@+id/tvTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
             android:layout_marginEnd="4dp"
             app:layout_constraintBottom_toTopOf="@+id/tvDate"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/vIconApp"
+            app:layout_constraintTop_toBottomOf="@+id/tvWasAdd"
             app:layout_constraintVertical_chainStyle="packed"
             app:time="@{notifyInfo.dateTimeShow}"
             tools:text="17:34" />

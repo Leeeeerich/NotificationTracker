@@ -25,6 +25,24 @@ class NotificationTrackerService : NotificationListenerService() {
                         notifyId = sbn.id,
                         appPackageName = sbn.packageName,
                         notifyText = sbn.notification.tickerText?.toString() ?: "",
+                        isAdding = true,
+                        dateTimeShow = DateTime(sbn.notification.`when`)
+                    )
+                )
+            }
+        }
+    }
+
+    override fun onNotificationRemoved(sbn: StatusBarNotification) {
+        if (pref.getTrackingStatus() == true) {
+            GlobalScope.launch(Dispatchers.IO) {
+                repository.insertNewNotify(
+                    NotifyInfo(
+                        id = 0,
+                        notifyId = sbn.id,
+                        appPackageName = sbn.packageName,
+                        notifyText = sbn.notification.tickerText?.toString() ?: "",
+                        isAdding = false,
                         dateTimeShow = DateTime(sbn.notification.`when`)
                     )
                 )
