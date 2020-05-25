@@ -24,7 +24,7 @@ class NotificationTrackerService : NotificationListenerService() {
                         id = 0,
                         notifyId = sbn.id,
                         appPackageName = sbn.packageName,
-                        notifyText = sbn.notification.tickerText.toString(),
+                        notifyText = sbn.notification.tickerText?.toString() ?: "",
                         dateTimeShow = DateTime(sbn.notification.`when`)
                     )
                 )
