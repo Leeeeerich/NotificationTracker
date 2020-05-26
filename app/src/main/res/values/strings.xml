@@ -18,4 +18,19 @@
     <string name="was_added">Was added in:</string>
     <string name="was_removed">Was removed in:</string>
     <string name="notify_id">Notify id = %s</string>
+
+    <string name="one">1</string>
+    <string name="two">2</string>
+    <string name="three">3</string>
+    <string name="four">4</string>
+    <string name="five">5</string>
+    <string name="six">6</string>
+    <string name="seven">7</string>
+    <string name="eight">8</string>
+    <string name="nine">9</string>
+    <string name="zero">0</string>
+    <string name="forgot">Forgot?</string>
+    <string name="pick_a_pin">Pick a PIN code</string>
+    <string name="repeat_input">Repeat input</string>
+    <string name="input_pin_code">Input PIN code</string>
 </resources>

@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/tvActionText"
+            style="@style/PinCodeNumberStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onClickDelete"
+            android:text="@string/input_pin_code"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toTopOf="@+id/guideline"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/vFirstPin"
+            android:layout_width="@dimen/dot_diameter"
+            android:layout_height="@dimen/dot_diameter"
+            android:background="@drawable/dot_empty"
+            app:layout_constraintBottom_toBottomOf="@+id/vSecondPin"
+            app:layout_constraintEnd_toStartOf="@+id/vSecondPin"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/vSecondPin" />
+
+        <View
+            android:id="@+id/vSecondPin"
+            android:layout_width="@dimen/dot_diameter"
+            android:layout_height="@dimen/dot_diameter"
+            android:layout_margin="@dimen/dot_spacing"
+            android:background="@drawable/dot_empty"
+            app:layout_constraintBottom_toTopOf="@+id/guideline"
+            app:layout_constraintEnd_toStartOf="@+id/vThirdPin"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/vFirstPin"
+            app:layout_constraintTop_toBottomOf="@+id/tvActionText" />
+
+        <View
+            android:id="@+id/vThirdPin"
+            android:layout_width="@dimen/dot_diameter"
+            android:layout_height="@dimen/dot_diameter"
+            android:layout_marginEnd="@dimen/dot_spacing"
+            android:background="@drawable/dot_empty"
+            app:layout_constraintBottom_toBottomOf="@+id/vSecondPin"
+            app:layout_constraintEnd_toStartOf="@+id/vFourthPin"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/vSecondPin"
+            app:layout_constraintTop_toTopOf="@+id/vSecondPin" />
+
+        <View
+            android:id="@+id/vFourthPin"
+            android:layout_width="@dimen/dot_diameter"
+            android:layout_height="@dimen/dot_diameter"
+            android:background="@drawable/dot_empty"
+            app:layout_constraintBottom_toBottomOf="@+id/vThirdPin"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/vThirdPin"
+            app:layout_constraintTop_toTopOf="@+id/vThirdPin" />
+
+        <TextView
+            android:id="@+id/tvOne"
+            style="@style/PinCodeNumberStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:tag="1"
+            android:text="@string/one"
+            app:layout_constraintBottom_toTopOf="@+id/tvFour"
+            app:layout_constraintEnd_toStartOf="@+id/tvTwo"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tvTwo"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+        <TextView
+            android:id="@+id/tvTwo"
+            style="@style/PinCodeNumberStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:tag="2"
+            android:text="@string/two"
+            app:layout_constraintBottom_toTopOf="@+id/tvFive"
+            app:layout_constraintEnd_toStartOf="@+id/tvThree"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/tvOne"
+            app:layout_constraintTop_toTopOf="@+id/guideline"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+        <TextView
+            android:id="@+id/tvThree"
+            style="@style/PinCodeNumberStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:tag="3"
+            android:text="@string/three"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/tvTwo"
+            app:layout_constraintTop_toTopOf="@+id/tvTwo" />
+
+        <TextView
+            android:id="@+id/tvFour"
+            style="@style/PinCodeNumberStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:tag="4"
+            android:text="@string/four"
+            app:layout_constraintBottom_toTopOf="@+id/tvSeven"
+            app:layout_constraintStart_toStartOf="@+id/tvOne"
+            app:layout_constraintTop_toBottomOf="@+id/tvTwo" />
+
+        <TextView
+            android:id="@+id/tvFive"
+            style="@style/PinCodeNumberStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:tag="5"
+            android:text="@string/five"
+            app:layout_constraintBottom_toTopOf="@+id/tvEight"
+            app:layout_constraintStart_toStartOf="@+id/tvTwo"
+            app:layout_constraintTop_toBottomOf="@+id/tvTwo" />
+
+        <TextView
+            android:id="@+id/tvSix"
+            style="@style/PinCodeNumberStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:tag="6"
+            android:text="@string/six"
+            app:layout_constraintStart_toStartOf="@+id/tvThree"
+            app:layout_constraintTop_toTopOf="@+id/tvFive" />
+
+        <TextView
+            android:id="@+id/tvSeven"
+            style="@style/PinCodeNumberStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:tag="7"
+            android:text="@string/seven"
+            app:layout_constraintBottom_toTopOf="@+id/tvLeftButton"
+            app:layout_constraintStart_toStartOf="@+id/tvFour"
+            app:layout_constraintTop_toBottomOf="@+id/tvFive" />
+
+        <TextView
+            android:id="@+id/tvEight"
+            style="@style/PinCodeNumberStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:tag="8"
+            android:text="@string/eight"
+            app:layout_constraintBottom_toTopOf="@+id/tvZero"
+            app:layout_constraintStart_toStartOf="@+id/tvFive"
+            app:layout_constraintTop_toBottomOf="@+id/tvFive" />
+
+        <TextView
+            android:id="@+id/tvNine"
+            style="@style/PinCodeNumberStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:tag="9"
+            android:text="@string/nine"
+            app:layout_constraintStart_toStartOf="@+id/tvSix"
+            app:layout_constraintTop_toTopOf="@+id/tvEight" />
+
+        <TextView
+            android:id="@+id/tvLeftButton"
+            style="@style/PinCodeNumberStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/forgot"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@+id/tvZero"
+            app:layout_constraintEnd_toEndOf="@+id/tvSeven"
+            app:layout_constraintStart_toStartOf="@+id/tvSeven"
+            app:layout_constraintTop_toBottomOf="@+id/tvEight" />
+
+        <TextView
+            android:id="@+id/tvZero"
+            style="@style/PinCodeNumberStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:tag="0"
+            android:text="@string/zero"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/tvEight"
+            app:layout_constraintTop_toBottomOf="@+id/tvEight" />
+
+        <TextView
+            android:id="@+id/tvRightButton"
+            style="@style/PinCodeNumberStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/ic_backspace"
+            android:text=""
+            app:layout_constraintEnd_toEndOf="@+id/tvNine"
+            app:layout_constraintStart_toStartOf="@+id/tvNine"
+            app:layout_constraintTop_toTopOf="@+id/tvZero" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="242dp" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

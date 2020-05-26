@@ -19,4 +19,13 @@
     <style name="PopupMenuStyle" parent="@android:style/Widget.PopupMenu">
         <item name="android:backgroundTint">#54000000</item>
     </style>
+
+    <style name="PinCodeNumberStyle" parent="TextAppearance.AppCompat.Large">
+        <item name="android:textSize">36sp</item>
+        <item name="android:padding">24dp</item>
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+        <item name="android:background">?android:attr/selectableItemBackgroundBorderless</item>
+        <item name="android:onClick">onClickPin</item>
+    </style>
 </resources>
