@@ -33,4 +33,5 @@
     <string name="pick_a_pin">Pick a PIN code</string>
     <string name="repeat_input">Repeat input</string>
     <string name="input_pin_code">Input PIN code</string>
+    <string name="bad_input_repeat_input">Bad input, please repeat input</string>
 </resources>

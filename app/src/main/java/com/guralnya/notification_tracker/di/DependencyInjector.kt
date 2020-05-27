@@ -14,7 +14,7 @@ import org.koin.dsl.module.module
 object DependencyInjector {
 
     val appModule = module {
-        single { Modules.getDb(get()) }
+        single { Modules.getDb(get(), get()) }
         single<PreferencesManager> { PreferencesManagerImpl(get()) }
         single<Repository> { RepositoryImpl(get()) }
         single { KeystoreManager(get(), get()) }

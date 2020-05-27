@@ -10,6 +10,7 @@ class PreferencesManagerImpl(private val context: Context) :
         private const val PREFERENCES_NAME = "notification_tracker"
         private const val TRACKING_STATUS = "tracking_status"
         private const val PIN_CODE = "pin_code"
+        private const val DB_PASS = "db_pass"
     }
 
     private fun getPreferences(): SharedPreferences =
@@ -27,13 +28,23 @@ class PreferencesManagerImpl(private val context: Context) :
         }
     }
 
-    override fun getPinCode(): String? = getPreferences().getString(PIN_CODE, "")
+    override fun getPinCode(): String? = getPreferences().getString(PIN_CODE, null)
 
     override fun savePinCode(code: String?) {
         if (code != null) {
             getPreferences().edit().putString(PIN_CODE, code).apply()
         } else {
             remove(PIN_CODE)
+        }
+    }
+
+    override fun getDbPass(): String? = getPreferences().getString(DB_PASS, null)
+
+    override fun saveDbPass(code: String?) {
+        if (code != null) {
+            getPreferences().edit().putString(DB_PASS, code).apply()
+        } else {
+            remove(DB_PASS)
         }
     }
 }

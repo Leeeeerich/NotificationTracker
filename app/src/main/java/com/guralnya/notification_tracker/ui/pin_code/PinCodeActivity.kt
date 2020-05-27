@@ -2,12 +2,12 @@ package com.guralnya.notification_tracker.ui.pin_code
 
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import com.guralnya.notification_tracker.R
 import com.guralnya.notification_tracker.databinding.ActivityPinCodeBinding
 import com.guralnya.notification_tracker.ui.MainActivity
@@ -22,11 +22,8 @@ class PinCodeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_pin_code)
 
+        observePinCodeLiveData()
         setDeleteCharListener()
-
-        if (vm.pinCode.isNullOrBlank()) {
-            createPinCode()
-        }
     }
 
     fun onClickPin(view: View) {
@@ -37,13 +34,16 @@ class PinCodeActivity : AppCompatActivity() {
         }
     }
 
-    private fun enter() {
-        startActivity(
-            Intent(
-                this,
-                MainActivity::class.java
-            ).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
-        )
+    private fun observePinCodeLiveData() {
+        vm.getPinCodeLiveData().observe(this, Observer {
+            if (it == null) {
+                createPinCode()
+            }
+        })
+    }
+
+    private fun enterInApp() {
+        startActivity(MainActivity.getIntent(this))
     }
 
     private fun createPinCode() {
@@ -53,6 +53,11 @@ class PinCodeActivity : AppCompatActivity() {
 
     private fun repeatingInputPin() {
         binding.tvActionText.text = getString(R.string.repeat_input)
+        vm.inputPin.clear()
+    }
+
+    private fun badInputRepeatingInputPin() {
+        binding.tvActionText.text = getString(R.string.bad_input_repeat_input)
         vm.inputPin.clear()
     }
 
@@ -115,17 +120,16 @@ class PinCodeActivity : AppCompatActivity() {
             vm.isCreatingPin && vm.newPinCode.isNotEmpty() -> {
                 if (vm.newPinCode == vm.inputPin.toString()) {
                     vm.createPinCode()
-                    enter()
+                    enterInApp()
                 } else {
                     badInput()
                 }
             }
-            !vm.isCreatingPin && vm.inputPin.toString() == vm.pinCode -> {
-                enter()
+            !vm.isCreatingPin && vm.inputPin.toString() == vm.getPinCodeLiveData().value -> {
+                enterInApp()
             }
-            !vm.isCreatingPin && vm.inputPin.toString() != vm.pinCode -> {
+            !vm.isCreatingPin && vm.inputPin.toString() != vm.getPinCodeLiveData().value -> {
                 badInput()
-                repeatingInputPin()
             }
         }
         upgradeDots()
@@ -134,6 +138,7 @@ class PinCodeActivity : AppCompatActivity() {
     private fun badInput() {
         badInputAnimation()
         vm.inputPin.clear()
+        badInputRepeatingInputPin()
     }
 
     private fun badInputAnimation() {

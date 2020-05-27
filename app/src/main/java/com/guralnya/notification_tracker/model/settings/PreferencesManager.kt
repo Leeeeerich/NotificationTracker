@@ -7,4 +7,7 @@ interface PreferencesManager {
 
     fun getPinCode(): String?
     fun savePinCode(code: String?)
+
+    fun getDbPass(): String?
+    fun saveDbPass(code: String?)
 }

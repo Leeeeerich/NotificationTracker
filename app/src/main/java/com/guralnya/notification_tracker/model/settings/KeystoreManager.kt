@@ -3,6 +3,7 @@ package com.guralnya.notification_tracker.model.settings
 import android.content.Context
 import android.security.KeyPairGeneratorSpec
 import android.util.Base64
+import com.guralnya.notification_tracker.BuildConfig
 import java.io.ByteArrayInputStream
 import java.io.ByteArrayOutputStream
 import java.io.IOException
@@ -26,7 +27,8 @@ class KeystoreManager(private val context: Context, private val preferences: Pre
 
     companion object {
         private const val ANDROID_KEY_STORE = "AndroidKeyStore"
-        private const val ALIAS = "NotificationTracker"
+        private const val ALIAS_PIN = BuildConfig.PIN_ALIAS
+        private const val ALIAS_DB_PASS = BuildConfig.DB_PASS_ALIAS
         private const val CIPHER_TYPE = "RSA/ECB/PKCS1Padding"
         private const val ALGORITHM = "RSA"
         private const val OPEN_SSL_CIPHER_PROVIDE = "AndroidOpenSSL"
@@ -35,7 +37,8 @@ class KeystoreManager(private val context: Context, private val preferences: Pre
 
     init {
         initKeyStore()
-        createKey()
+        createKey(ALIAS_PIN)
+        createKey(ALIAS_DB_PASS)
     }
 
     @Throws(
@@ -49,15 +52,15 @@ class KeystoreManager(private val context: Context, private val preferences: Pre
         keyStore.load(null)
     }
 
-    private fun createKey() {
+    private fun createKey(alias: String) {
         try {
-            if (!keyStore.containsAlias(ALIAS)) {
+            if (!keyStore.containsAlias(alias)) {
                 val start = Calendar.getInstance()
                 val end = Calendar.getInstance()
                 end.add(Calendar.YEAR, 5)
                 val spec = KeyPairGeneratorSpec.Builder(context)
-                    .setAlias(ALIAS)
-                    .setSubject(X500Principal("CN=$ALIAS, O=Android Authority"))
+                    .setAlias(alias)
+                    .setSubject(X500Principal("CN=$alias, O=Android Authority"))
                     .setSerialNumber(BigInteger.ONE)
                     .setStartDate(start.time)
                     .setEndDate(end.time)
@@ -77,9 +80,9 @@ class KeystoreManager(private val context: Context, private val preferences: Pre
     private fun getCipher(): Cipher = Cipher.getInstance(CIPHER_TYPE, BCWORKAROUND_CIPHER_PROVIDE)
 
 
-    private fun encryptString(string: String): String? {
+    private fun encryptString(alias: String, data: String): String? {
         try {
-            val privateKeyEntry = keyStore.getEntry(ALIAS, null) as KeyStore.PrivateKeyEntry
+            val privateKeyEntry = keyStore.getEntry(alias, null) as KeyStore.PrivateKeyEntry
             val publicKey = privateKeyEntry.certificate.publicKey as RSAPublicKey
             val encrypt = getCipher()
             encrypt.init(Cipher.ENCRYPT_MODE, publicKey)
@@ -87,44 +90,56 @@ class KeystoreManager(private val context: Context, private val preferences: Pre
             val cipherOutputStream = CipherOutputStream(
                 outputStream, encrypt
             )
-            cipherOutputStream.write(string.toByteArray(Charsets.UTF_8))
+            cipherOutputStream.write(data.toByteArray(Charsets.UTF_8))
             cipherOutputStream.close()
             val bytes = outputStream.toByteArray()
             return Base64.encodeToString(bytes, Base64.DEFAULT)
         } catch (e: Exception) {
-            //TODO: Add log
         }
         return null
     }
 
-    private fun decryptString(string: String): String? {
+    private fun decryptString(alias: String, data: String): String? {
         try {
-            val privateKeyEntry = keyStore.getEntry(ALIAS, null) as KeyStore.PrivateKeyEntry
+            val privateKeyEntry = keyStore.getEntry(alias, null) as KeyStore.PrivateKeyEntry
             val decrypt = getCipher()
             decrypt.init(Cipher.DECRYPT_MODE, privateKeyEntry.privateKey)
             val cipherInputStream = CipherInputStream(
-                ByteArrayInputStream(Base64.decode(string, Base64.DEFAULT)), decrypt
+                ByteArrayInputStream(Base64.decode(data, Base64.DEFAULT)), decrypt
             )
             val bytes = cipherInputStream.readBytes()
             return String(bytes, 0, bytes.size, Charsets.UTF_8)
 
         } catch (e: Exception) {
-            //TODO: Add log
         }
         return null
     }
 
-    fun deleteKey() {
-        keyStore.deleteEntry(ALIAS)
+    fun deleteKeyPin() {
+        keyStore.deleteEntry(ALIAS_PIN)
     }
 
-    fun getPassword(): String? {
+    fun deleteKeyDbPass() {
+        keyStore.deleteEntry(ALIAS_DB_PASS)
+    }
+
+    fun getPin(): String? {
         val encryptedPwd = preferences.getPinCode()
-        return if (encryptedPwd != null) decryptString(encryptedPwd) else null
+        return if (encryptedPwd != null) decryptString(ALIAS_PIN, encryptedPwd) else null
     }
 
-    fun setPassword(password: String) {
-        val encryptedPwd = encryptString(password)
+    fun setPin(password: String) {
+        val encryptedPwd = encryptString(ALIAS_PIN, password)
         preferences.savePinCode(encryptedPwd)
+    }
+
+    fun getDbPass(): String? {
+        val encryptedPwd = preferences.getDbPass()
+        return if (encryptedPwd != null) decryptString(ALIAS_DB_PASS, encryptedPwd) else null
+    }
+
+    fun setDbPass(password: String) {
+        val encryptedPwd = encryptString(ALIAS_DB_PASS, password)
+        preferences.saveDbPass(encryptedPwd)
     }
 }

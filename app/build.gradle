@@ -48,10 +48,14 @@ android {
         release {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.release
+            buildConfigField "String", "PIN_ALIAS", keystoreProperties['PIN_ALIAS']
+            buildConfigField "String", "DB_PASS_ALIAS", keystoreProperties['DB_PASS_ALIAS']
         }
         debug {
             minifyEnabled false
             signingConfig signingConfigs.debug
+            buildConfigField "String", "PIN_ALIAS", keystoreProperties['PIN_ALIAS']
+            buildConfigField "String", "DB_PASS_ALIAS", keystoreProperties['DB_PASS_ALIAS']
         }
     }
     compileOptions {
@@ -76,6 +80,10 @@ dependencies {
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     kapt "androidx.room:room-compiler:2.2.5"
     implementation "androidx.room:room-ktx:2.2.5"
+
+    //Cipher for DB
+    implementation 'net.zetetic:android-database-sqlcipher:4.3.0'
+    implementation "androidx.sqlite:sqlite:2.1.0"
 
     //koin
     implementation 'org.koin:koin-android:1.0.2'
