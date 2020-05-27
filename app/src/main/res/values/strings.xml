@@ -34,4 +34,9 @@
     <string name="repeat_input">Repeat input</string>
     <string name="input_pin_code">Input PIN code</string>
     <string name="bad_input_repeat_input">Bad input, please repeat input</string>
+
+    <string name="reset_pin_text">Do you want to reset the PIN code? Caution, this will clear all application data. Do you want to reset the PIN code?</string>
+    <string name="manual_reset_pin_text">Want to reset your PIN? Caution, this will clear all application data. To do this, you need to go into the application settings -> storage and cash and execute: clear Storage </string>
+    <string name="cancel_button">Cancel</string>
+    <string name="reset_pin_button">Reset PIN</string>
 </resources>

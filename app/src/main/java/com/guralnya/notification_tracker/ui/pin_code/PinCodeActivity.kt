@@ -2,8 +2,14 @@ package com.guralnya.notification_tracker.ui.pin_code
 
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
+import android.app.Activity
+import android.content.Intent
+import android.net.Uri
+import android.os.Build
 import android.os.Bundle
+import android.provider.Settings
 import android.view.View
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
@@ -11,6 +17,7 @@ import androidx.lifecycle.Observer
 import com.guralnya.notification_tracker.R
 import com.guralnya.notification_tracker.databinding.ActivityPinCodeBinding
 import com.guralnya.notification_tracker.ui.MainActivity
+import com.guralnya.notification_tracker.ui.dialogs.ResetPassDialog
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class PinCodeActivity : AppCompatActivity() {
@@ -18,12 +25,17 @@ class PinCodeActivity : AppCompatActivity() {
     private lateinit var binding: ActivityPinCodeBinding
     private val vm: PinCodeViewModel by viewModel()
 
+    companion object {
+        private const val RESET_PIN_REQUEST_CODE = 101
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_pin_code)
 
         observePinCodeLiveData()
         setDeleteCharListener()
+        setForgotButtonListener()
     }
 
     fun onClickPin(view: View) {
@@ -66,6 +78,19 @@ class PinCodeActivity : AppCompatActivity() {
             if (vm.inputPin.isNotEmpty()) {
                 vm.inputPin.delete(vm.inputPin.length - 1, vm.inputPin.length)
                 upgradeDots()
+            }
+        }
+    }
+
+    private fun setForgotButtonListener() {
+        binding.tvLeftButton.setOnClickListener {
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
+                ResetPassDialog(getString(R.string.manual_reset_pin_text), ::manualResetPin).show(
+                    this
+                )
+                //TODO need control: was reset PIN
+            } else {
+                ResetPassDialog(getString(R.string.reset_pin_text), ::resetPinCode).show(this)
             }
         }
     }
@@ -158,5 +183,34 @@ class PinCodeActivity : AppCompatActivity() {
         anim.repeatMode = ObjectAnimator.REVERSE
         anim.duration = 150
         return anim
+    }
+
+    @RequiresApi(Build.VERSION_CODES.N)
+    private fun resetPinCode() {
+        baseContext.dataDir.deleteRecursively()
+        restartActivity()
+    }
+
+    private fun restartActivity() {
+        finishAffinity()
+        val intent = Intent(applicationContext, this::class.java)
+        startActivity(intent)
+    }
+
+    private fun manualResetPin() {
+        startActivityForResult(
+            Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
+                .addCategory(Intent.CATEGORY_DEFAULT)
+                .setData(Uri.parse("package:$packageName")), RESET_PIN_REQUEST_CODE
+        )
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == RESET_PIN_REQUEST_CODE) {
+            if (resultCode == Activity.RESULT_CANCELED) {
+                restartActivity()
+            }
+        }
     }
 }
