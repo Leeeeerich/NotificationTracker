@@ -1,0 +1,42 @@
+<resources>
+    <string name="app_name">Notification Tracker</string>
+
+    <string name="no_notification_yet">Тут ще немає повідомлень!</string>
+    <string name="start_button">Розпочати</string>
+    <string name="stop_button">Призупинити</string>
+
+    <string name="all_title">Усі</string>
+    <string name="per_hour">За останню годину</string>
+    <string name="per_day">За останній день</string>
+    <string name="per_month">За останній</string>
+
+    <string name="notification_listener_service">Notification listener service</string>
+    <string name="notification_listener_service_explanation">Додаток буде записувати всі вхідні повідомлення та їх видалення з шторки. Для початку відстеження повідомлень, необхідно дати дозвіл, продовжити?</string>
+    <string name="yes_button">Так</string>
+    <string name="no_button">Ні</string>
+
+    <string name="was_added">Добавлено в:</string>
+    <string name="was_removed">Видалено: в:</string>
+    <string name="notify_id">Id повідомлення = %s</string>
+
+    <string name="one">1</string>
+    <string name="two">2</string>
+    <string name="three">3</string>
+    <string name="four">4</string>
+    <string name="five">5</string>
+    <string name="six">6</string>
+    <string name="seven">7</string>
+    <string name="eight">8</string>
+    <string name="nine">9</string>
+    <string name="zero">0</string>
+    <string name="forgot">Забули?</string>
+    <string name="pick_a_pin">Придумайте PIN код</string>
+    <string name="repeat_input">Повторіть ввод</string>
+    <string name="input_pin_code">Введіть PIN код</string>
+    <string name="bad_input_repeat_input">Неправильний PIN код, будь-ласка повторіть введення</string>
+
+    <string name="reset_pin_text">Ви хочете скинути PIN-код? Обережно, це очистить усі дані програми. Ви хочете скинути PIN-код?</string>
+    <string name="manual_reset_pin_text">Хочете скинути свій PIN-код? Обережно, це очистить усі дані програми. Для цього потрібно зайти в налаштування програми -> зберігання та готівку та виконати: очистити Зберігання?</string>
+    <string name="cancel_button">Відмінити</string>
+    <string name="reset_pin_button">Скинути PIN</string>
+</resources>
