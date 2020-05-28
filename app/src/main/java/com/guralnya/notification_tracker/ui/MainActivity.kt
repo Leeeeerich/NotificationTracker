@@ -18,6 +18,22 @@ class MainActivity : AppCompatActivity() {
 
     private val vm: MainViewModel by viewModel()
     var filterUpdateListener: ((Long) -> Unit)? = null
+    var endSelectableModeListener: ((Boolean) -> Unit)? = null
+        set(value) {
+            field = value
+            if (field != null) vFilter.setImageDrawable(
+                ContextCompat.getDrawable(
+                    this,
+                    R.drawable.ic_done_all
+                )
+            )
+            if (field == null) vFilter.setImageDrawable(
+                ContextCompat.getDrawable(
+                    this,
+                    R.drawable.ic_sort
+                )
+            )
+        }
 
     companion object {
         fun getIntent(context: Context) = Intent(context, MainActivity::class.java)
@@ -29,7 +45,11 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         vFilter.setOnClickListener {
-            showPopupMenu(it)
+            if (endSelectableModeListener != null) {
+                endSelectableModeListener?.invoke(true)
+            } else {
+                showPopupMenu(it)
+            }
         }
     }
 
@@ -61,5 +81,14 @@ class MainActivity : AppCompatActivity() {
         }
         llMainActivity.foreground = ContextCompat.getDrawable(this, R.color.colorTranslucency)
         popupMenu.show()
+    }
+
+    override fun onBackPressed() {
+        if (endSelectableModeListener != null) {
+            endSelectableModeListener?.invoke(false)
+            endSelectableModeListener = null
+        } else {
+            super.onBackPressed()
+        }
     }
 }

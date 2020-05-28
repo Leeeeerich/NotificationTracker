@@ -3,7 +3,9 @@ package com.guralnya.notification_tracker.model.models
 import android.content.Context
 import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
+import androidx.databinding.ObservableBoolean
 import androidx.room.Entity
+import androidx.room.Ignore
 import androidx.room.PrimaryKey
 import androidx.room.TypeConverters
 import com.guralnya.notification_tracker.model.converters.DateTimeToLong
@@ -19,6 +21,9 @@ data class NotifyInfo(
     val isAdding: Boolean,
     val dateTimeShow: DateTime
 ) {
+
+    @Ignore
+    var isChecked = ObservableBoolean(false)
 
     private fun getAppInfo(context: Context): ApplicationInfo? {
         return try {

@@ -10,4 +10,8 @@ class RepositoryImpl(private val db: NotifyTrackerDb) : Repository {
 
     override fun getAllNotify(filterDateTime: String) =
         db.notifyTracker().getAllNotify(filterDateTime)
+
+    override fun deleteNotifies(listDeleteable: List<NotifyInfo>) {
+        db.notifyTracker().delete(listDeleteable)
+    }
 }

@@ -43,7 +43,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun initUi() {
-        adapter = NotifyInfoAdapter()
+        adapter = NotifyInfoAdapter(::startSelectableModeListener)
         binding.vNotificationList.adapter = adapter
         binding.btStartTracking.setOnClickListener {
             (it as ToggleButton)
@@ -72,6 +72,20 @@ class HomeFragment : Fragment() {
                 binding.btStartTracking.isChecked = it
             }
         })
+    }
+
+    private fun startSelectableModeListener(boolean: Boolean) {
+        (activity as MainActivity).endSelectableModeListener = ::endSelectableModeListener
+    }
+
+    private fun endSelectableModeListener(isDelete: Boolean) {
+        if (isDelete) {
+            vm.deleteNotifies(adapter.list.filter { it.isChecked.get() })
+        } else {
+            adapter.list.forEach { it.isChecked.set(false) }
+        }
+        adapter.isSelectableMode = false
+        (activity as MainActivity).endSelectableModeListener = null
     }
 
     private fun showEmptyScreen(isShow: Boolean) {

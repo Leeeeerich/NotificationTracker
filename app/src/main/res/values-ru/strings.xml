@@ -16,7 +16,7 @@
     <string name="no_button">Нет</string>
 
     <string name="was_added">Было добвлено в:</string>
-    <string name="was_removed">Было удалено:</string>
+    <string name="was_removed">Было удалено в:</string>
     <string name="notify_id">Id уведомления = %s</string>
 
     <string name="one">1</string>

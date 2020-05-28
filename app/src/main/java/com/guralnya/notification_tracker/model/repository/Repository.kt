@@ -7,4 +7,5 @@ interface Repository {
 
     suspend fun insertNewNotify(notifyInfo: NotifyInfo)
     fun getAllNotify(filterDateTime: String = "0"): LiveData<List<NotifyInfo>>
+    fun deleteNotifies(listDeletable: List<NotifyInfo>)
 }
