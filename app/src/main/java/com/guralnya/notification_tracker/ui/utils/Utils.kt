@@ -51,4 +51,24 @@ object Utils {
             })
         return alertDialogBuilder.create()
     }
+
+    fun sendEmail(context: Context) {
+        val emailIntent = Intent()
+        emailIntent.type = "plain/text"
+
+        emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, "sosov.valeriy@gmail.com")
+
+        emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Notification Tracker")
+
+        emailIntent.putExtra(
+            android.content.Intent.EXTRA_TEXT,
+            "Hi! I have ask/offer/a complaint/wish - "
+        )
+
+        context.startActivity(
+            Intent.createChooser(
+                emailIntent, "Send mail..."
+            )
+        )
+    }
 }

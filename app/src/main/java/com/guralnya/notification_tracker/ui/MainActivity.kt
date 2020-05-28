@@ -5,10 +5,13 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.PopupMenu
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.guralnya.notification_tracker.R
 import com.guralnya.notification_tracker.model.constants.Filtration
+import com.guralnya.notification_tracker.ui.dialogs.UniversalDialog
+import com.guralnya.notification_tracker.ui.utils.Utils
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.toolbar_with_sorting_button.*
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -21,18 +24,23 @@ class MainActivity : AppCompatActivity() {
     var endSelectableModeListener: ((Boolean) -> Unit)? = null
         set(value) {
             field = value
-            if (field != null) vFilter.setImageDrawable(
-                ContextCompat.getDrawable(
-                    this,
-                    R.drawable.ic_done_all
+            if (field != null) {
+                vFilter.setImageDrawable(
+                    ContextCompat.getDrawable(
+                        this,
+                        R.drawable.ic_done_all
+                    )
                 )
-            )
-            if (field == null) vFilter.setImageDrawable(
-                ContextCompat.getDrawable(
-                    this,
-                    R.drawable.ic_sort
+                imInfo.visibility = View.GONE
+            } else if (field == null) {
+                vFilter.setImageDrawable(
+                    ContextCompat.getDrawable(
+                        this,
+                        R.drawable.ic_sort
+                    )
                 )
-            )
+                imInfo.visibility = View.VISIBLE
+            }
         }
 
     companion object {
@@ -44,16 +52,23 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        setInfoButtonListener()
         vFilter.setOnClickListener {
             if (endSelectableModeListener != null) {
                 endSelectableModeListener?.invoke(true)
             } else {
-                showPopupMenu(it)
+                showFilterMenu(it)
             }
         }
     }
 
-    private fun showPopupMenu(v: View) {
+    private fun setInfoButtonListener() {
+        imInfo.setOnClickListener {
+            showInfoMenu(it)
+        }
+    }
+
+    private fun showFilterMenu(v: View) {
         val popupMenu = PopupMenu(this, v)
         popupMenu.inflate(R.menu.menu_filters)
         popupMenu.menu.getItem(vm.filtration.ordinal).isChecked = true
@@ -70,6 +85,33 @@ class MainActivity : AppCompatActivity() {
                 }
                 R.id.menuPerMonth -> {
                     vm.filtration = Filtration.PER_MONTH
+                }
+            }
+            llMainActivity.foreground = null
+            filterUpdateListener?.invoke(vm.filtration.filterValue)
+            true
+        }
+        popupMenu.setOnDismissListener {
+            llMainActivity.foreground = null
+        }
+        llMainActivity.foreground = ContextCompat.getDrawable(this, R.color.colorTranslucency)
+        popupMenu.show()
+    }
+
+    private fun showInfoMenu(v: View) {
+        val popupMenu = PopupMenu(this, v)
+        popupMenu.inflate(R.menu.menu_info)
+        popupMenu.menu.getItem(vm.filtration.ordinal).isChecked = true
+        popupMenu.setOnMenuItemClickListener { item ->
+            when (item.itemId) {
+                R.id.menuChangePin -> {
+                    Toast.makeText(this, "Coming soon", Toast.LENGTH_SHORT).show()
+                }
+                R.id.menuPrivacyPolicy -> {
+                    UniversalDialog(getString(R.string.privacy_policy_text), null, null).show(this)
+                }
+                R.id.menuContactUs -> {
+                    Utils.sendEmail(this)
                 }
             }
             llMainActivity.foreground = null

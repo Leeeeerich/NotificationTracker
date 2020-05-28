@@ -39,4 +39,9 @@
     <string name="manual_reset_pin_text">Хотите сбросить свой PIN-код? Внимание, это очистит все данные приложения. Для этого вам нужно зайти в настройки приложения -> "Хранилище и Кеш" и выполнить: "очистить хранилище". Продолжить?</string>
     <string name="cancel_button">Отмена</string>
     <string name="reset_pin_button">Сбросить PIN</string>
+
+    <string name="privacy_policy_item">Политика приватности</string>
+    <string name="privacy_policy_text">Notification Tracker - не собирает никаких персональных данных, любые данные, полученные во время работы приложения, хранятся в зашифрованной базе данных с ключом на основе вашего PIN-кода и не могут быть получены нами. Свяжитесь с нами: если у вас есть какие-либо вопросы об этой Политике приватности или другие вопросы, свяжитесь с нами: sosov.valeriy@gmail.com</string>
+    <string name="contact_us_item">Написать нам</string>
+    <string name="change_pin_item">Изменить PIN</string>
 </resources>

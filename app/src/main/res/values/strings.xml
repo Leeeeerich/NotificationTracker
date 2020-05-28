@@ -39,4 +39,9 @@
     <string name="manual_reset_pin_text">Want to reset your PIN? Caution, this will clear all application data. To do this, you need to go into the application settings -> storage and cash and execute: clear Storage. Continue? </string>
     <string name="cancel_button">Cancel</string>
     <string name="reset_pin_button">Reset PIN</string>
+
+    <string name="privacy_policy_item">Privacy policy</string>
+    <string name="privacy_policy_text">Notification Tracker - does not collect any personal data, any data obtained while the application is running is stored in an encrypted database with a key based on your PIN-code and cannot be get by us. Contact us: if you have any questions about this Privacy Policy or different questions contact us: sosov.valeriy@gmail.com</string>
+    <string name="contact_us_item">Contact us</string>
+    <string name="change_pin_item">Change PIN</string>
 </resources>

@@ -39,4 +39,9 @@
     <string name="manual_reset_pin_text">Хочете скинути свій PIN-код? Обережно, це очистить усі дані програми. Для цього потрібно зайти в налаштування програми -> зберігання та готівку та виконати: очистити Зберігання?</string>
     <string name="cancel_button">Відмінити</string>
     <string name="reset_pin_button">Скинути PIN</string>
+
+    <string name="privacy_policy_item">Політика приватності</string>
+    <string name="privacy_policy_text">Notification Tracker - не збирає жодних особистих даних, будь-які дані, отримані під час роботи програми, зберігаються в зашифрованій базі даних з ключем, заснованними на вашому PIN-коді, і не можуть бути отримані нами. Зверніться до нас: якщо у вас є питання щодо цієї Політики приватності або інші питання, зв\'яжіться з нами: sosov.valeriy@gmail.com</string>
+    <string name="contact_us_item">Напишіть нам</string>
+    <string name="change_pin_item">Змінити PIN</string>
 </resources>
