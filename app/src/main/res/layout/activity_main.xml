@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <androidx.fragment.app.FragmentContainerView
+    <fragment
         android:id="@+id/host_fragment"
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"

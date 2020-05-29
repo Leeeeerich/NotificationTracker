@@ -8,6 +8,8 @@ import android.widget.PopupMenu
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
 import com.guralnya.notification_tracker.R
 import com.guralnya.notification_tracker.model.constants.Filtration
 import com.guralnya.notification_tracker.ui.dialogs.UniversalDialog
@@ -16,9 +18,9 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.toolbar_with_sorting_button.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
-
 class MainActivity : AppCompatActivity() {
 
+    private lateinit var navController: NavController
     private val vm: MainViewModel by viewModel()
     var filterUpdateListener: ((Long) -> Unit)? = null
     var endSelectableModeListener: ((Boolean) -> Unit)? = null
@@ -51,6 +53,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        navController = Navigation.findNavController(this, R.id.host_fragment)
 
         setInfoButtonListener()
         vFilter.setOnClickListener {

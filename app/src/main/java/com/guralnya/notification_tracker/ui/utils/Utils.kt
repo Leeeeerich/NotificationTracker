@@ -18,7 +18,7 @@ object Utils {
         )
         if (!TextUtils.isEmpty(flat)) {
             val names = flat.split(":")
-            for ((i, e) in names.withIndex()) {
+            for ((i, _) in names.withIndex()) {
                 val cn = ComponentName.unflattenFromString(names[i])
                 if (cn != null) {
                     if (TextUtils.equals(pkgName, cn.packageName)) {
@@ -36,7 +36,7 @@ object Utils {
         alertDialogBuilder.setMessage(R.string.notification_listener_service_explanation)
         alertDialogBuilder.setPositiveButton(
             R.string.yes_button,
-            DialogInterface.OnClickListener { dialog, id ->
+            DialogInterface.OnClickListener { _, _ ->
                 ctx.startActivity(
                     Intent(
                         Settings.ACTION_NOTIFICATION_LISTENER_SETTINGS
@@ -45,10 +45,7 @@ object Utils {
             })
         alertDialogBuilder.setNegativeButton(
             R.string.no_button,
-            DialogInterface.OnClickListener { dialog, id ->
-                // If you choose to not enable the notification listener
-                // the app. will not work as expected
-            })
+            DialogInterface.OnClickListener { _, _ -> })
         return alertDialogBuilder.create()
     }
 
@@ -56,12 +53,12 @@ object Utils {
         val emailIntent = Intent()
         emailIntent.type = "plain/text"
 
-        emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, "sosov.valeriy@gmail.com")
+        emailIntent.putExtra(Intent.EXTRA_EMAIL, "sosov.valeriy@gmail.com")
 
-        emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Notification Tracker")
+        emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Notification Tracker")
 
         emailIntent.putExtra(
-            android.content.Intent.EXTRA_TEXT,
+            Intent.EXTRA_TEXT,
             "Hi! I have ask/offer/a complaint/wish - "
         )
 

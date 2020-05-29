@@ -43,9 +43,9 @@ abstract class BaseFullscreenDialog : DialogFragment() {
 
     fun show(fragment: Fragment?) {
         if (fragment != null) {
-            val fragmentManager = fragment.fragmentManager
-            if (fragmentManager != null && !fragmentManager.isDestroyed && !isShowing() || !isAdded) {
-                this.show(fragmentManager!!, tag())
+            val fragmentManager = fragment.parentFragmentManager
+            if (!fragmentManager.isDestroyed && !isShowing() || !isAdded) {
+                this.show(fragmentManager, tag())
             }
         }
     }

@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION")
+
 package com.guralnya.notification_tracker.model.settings
 
 import android.content.Context

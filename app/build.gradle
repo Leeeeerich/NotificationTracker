@@ -34,7 +34,7 @@ android {
 
     signingConfigs {
         release {
-            storeFile file("../keystore.jks")
+            storeFile file("../NotificationTracker.jks")
             storePassword keystoreProperties['RELEASE_STORE_PASSWORD']
             keyAlias keystoreProperties['RELEASE_KEY_ALIAS']
             keyPassword keystoreProperties['RELEASE_KEY_PASSWORD']
@@ -47,6 +47,7 @@ android {
     buildTypes {
         release {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            minifyEnabled false
             signingConfig signingConfigs.release
             buildConfigField "String", "PIN_ALIAS", keystoreProperties['PIN_ALIAS']
             buildConfigField "String", "DB_PASS_ALIAS", keystoreProperties['DB_PASS_ALIAS']
