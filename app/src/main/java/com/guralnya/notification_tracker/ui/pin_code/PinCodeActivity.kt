@@ -36,6 +36,7 @@ class PinCodeActivity : AppCompatActivity() {
         observePinCodeLiveData()
         setDeleteCharListener()
         setForgotButtonListener()
+        upgradeDots()
     }
 
     fun onClickPin(view: View) {
