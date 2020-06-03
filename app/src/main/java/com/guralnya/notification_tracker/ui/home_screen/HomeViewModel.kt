@@ -20,7 +20,10 @@ class HomeViewModel(
     var filtration = Filtration.ALL_TIME
 
     fun getNotificationsLiveData(filterMilliseconds: Long) =
-        repository.getAllNotify(filterMilliseconds.toString())
+        repository.getAllNotify(
+            filterMilliseconds.toString(),
+            preferencesManager.getIsShowRemoved()
+        )
 
     fun getTrackingStatus(): LiveData<Boolean> = trackingStatusLiveData
 

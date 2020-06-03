@@ -40,5 +40,6 @@
         <item name="android:paddingBottom">16dp</item>
         <item name="android:colorAccent">#784545</item>
         <item name="android:textSize">16sp</item>
+        <item name="android:maxLines">2</item>
     </style>
 </resources>

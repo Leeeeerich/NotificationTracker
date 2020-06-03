@@ -46,7 +46,7 @@
     <string name="change_pin_item">Изменить PIN</string>
 
     <!-- SettingsFragment -->
-    <string name="is_show_removed">Показывать удалённые из шторки</string>
+    <string name="is_show_removed">Скрывать записи когда удалёны из шторки</string>
     <string name="settings_title">Настройки</string>
     <string name="save_button">Сохранить</string>
     <string name="changes_was_saved">Изменения сохранены</string>
