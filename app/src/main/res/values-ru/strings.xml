@@ -44,4 +44,10 @@
     <string name="privacy_policy_text">Notification Tracker - не собирает никаких персональных данных, любые данные, полученные во время работы приложения, хранятся в зашифрованной базе данных с ключом на основе вашего PIN-кода и не могут быть получены нами. Свяжитесь с нами: если у вас есть какие-либо вопросы об этой Политике приватности или другие вопросы, свяжитесь с нами: sosov.valeriy@gmail.com</string>
     <string name="contact_us_item">Написать нам</string>
     <string name="change_pin_item">Изменить PIN</string>
+
+    <!-- SettingsFragment -->
+    <string name="is_show_removed">Показывать удалённые из шторки</string>
+    <string name="settings_title">Настройки</string>
+    <string name="save_button">Сохранить</string>
+    <string name="changes_was_saved">Изменения сохранены</string>
 </resources>

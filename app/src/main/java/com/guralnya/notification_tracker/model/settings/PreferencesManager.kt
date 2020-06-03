@@ -10,4 +10,7 @@ interface PreferencesManager {
 
     fun getDbPass(): String?
     fun saveDbPass(code: String?)
+
+    fun getIsShowRemoved(): Boolean
+    fun saveIsShowRemoved(isShow: Boolean)
 }

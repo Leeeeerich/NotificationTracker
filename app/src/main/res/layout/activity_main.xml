@@ -8,12 +8,6 @@
     android:orientation="vertical"
     tools:context=".ui.MainActivity">
 
-    <include
-        android:id="@+id/vToolbar"
-        layout="@layout/toolbar_with_sorting_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
     <fragment
         android:id="@+id/host_fragment"
         android:name="androidx.navigation.fragment.NavHostFragment"

@@ -11,6 +11,7 @@ class PreferencesManagerImpl(private val context: Context) :
         private const val TRACKING_STATUS = "tracking_status"
         private const val PIN_CODE = "pin_code"
         private const val DB_PASS = "db_pass"
+        private const val IS_SHOW_REMOVED = "is_show_removed"
     }
 
     private fun getPreferences(): SharedPreferences =
@@ -46,5 +47,11 @@ class PreferencesManagerImpl(private val context: Context) :
         } else {
             remove(DB_PASS)
         }
+    }
+
+    override fun getIsShowRemoved(): Boolean = getPreferences().getBoolean(IS_SHOW_REMOVED, true)
+
+    override fun saveIsShowRemoved(isShow: Boolean) {
+        getPreferences().edit().putBoolean(IS_SHOW_REMOVED, isShow).apply()
     }
 }

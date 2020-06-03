@@ -9,6 +9,15 @@
         tools:context=".ui.home_screen.HomeFragment">
 
         <include
+            android:id="@+id/vToolbar"
+            layout="@layout/toolbar_with_sorting_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <include
             android:id="@+id/v_empty_screen"
             layout="@layout/view_no_notification"
             android:layout_width="match_parent"
@@ -18,12 +27,12 @@
             app:layout_constraintBottom_toTopOf="@+id/flBottomGradient"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/vToolbar" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/vNotificationList"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
             android:clipToPadding="false"
             android:paddingBottom="112dp"
             android:visibility="visible"
@@ -31,7 +40,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/vToolbar" />
 
         <FrameLayout
             android:id="@+id/flBottomGradient"

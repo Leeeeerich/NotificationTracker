@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.guralnya.notification_tracker.model.constants.Filtration
 import com.guralnya.notification_tracker.model.models.NotifyInfo
 import com.guralnya.notification_tracker.model.repository.Repository
 import com.guralnya.notification_tracker.model.settings.PreferencesManager
@@ -16,6 +17,7 @@ class HomeViewModel(
 ) : ViewModel() {
 
     private val trackingStatusLiveData = MutableLiveData<Boolean>()
+    var filtration = Filtration.ALL_TIME
 
     fun getNotificationsLiveData(filterMilliseconds: Long) =
         repository.getAllNotify(filterMilliseconds.toString())

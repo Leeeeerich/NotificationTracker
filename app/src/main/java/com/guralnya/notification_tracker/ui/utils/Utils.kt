@@ -6,6 +6,7 @@ import android.content.DialogInterface
 import android.content.Intent
 import android.provider.Settings
 import android.text.TextUtils
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.guralnya.notification_tracker.R
 
@@ -67,5 +68,13 @@ object Utils {
                 emailIntent, "Send mail..."
             )
         )
+    }
+
+    fun showToast(context: Context, msg: String) {
+        Toast.makeText(context, msg, Toast.LENGTH_LONG).show()
+    }
+
+    fun showToast(context: Context, msgResId: Int) {
+        Toast.makeText(context, context.getString(msgResId), Toast.LENGTH_LONG).show()
     }
 }

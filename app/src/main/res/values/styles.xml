@@ -28,4 +28,17 @@
         <item name="android:background">?android:attr/selectableItemBackgroundBorderless</item>
         <item name="android:onClick">onClickPin</item>
     </style>
+
+    <style name="SwitchStyle" parent="Widget.AppCompat.CompoundButton.Switch">
+        <item name="android:background">@drawable/background_circle_with_ripple</item>
+        <item name="android:layout_marginTop">8dp</item>
+        <item name="android:layout_marginStart">8dp</item>
+        <item name="android:layout_marginEnd">8dp</item>
+        <item name="android:paddingStart">8dp</item>
+        <item name="android:paddingEnd">8dp</item>
+        <item name="android:paddingTop">16dp</item>
+        <item name="android:paddingBottom">16dp</item>
+        <item name="android:colorAccent">#784545</item>
+        <item name="android:textSize">16sp</item>
+    </style>
 </resources>

@@ -6,22 +6,31 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.PopupMenu
 import android.widget.ToggleButton
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
+import androidx.navigation.ui.NavigationUI
 import com.guralnya.notification_tracker.R
 import com.guralnya.notification_tracker.databinding.FragmentHomeBinding
+import com.guralnya.notification_tracker.model.constants.Filtration
 import com.guralnya.notification_tracker.model.services.NotificationTrackerService
-import com.guralnya.notification_tracker.ui.MainActivity
+import com.guralnya.notification_tracker.ui.dialogs.UniversalDialog
+import com.guralnya.notification_tracker.ui.utils.Utils
 import com.guralnya.notification_tracker.ui.utils.Utils.buildNotificationServiceAlertDialog
 import com.guralnya.notification_tracker.ui.utils.Utils.isNotificationServiceEnabled
+import kotlinx.android.synthetic.main.toolbar_with_sorting_button.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class HomeFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeBinding
     private lateinit var adapter: NotifyInfoAdapter
+    private lateinit var navController: NavController
     private val vm: HomeViewModel by viewModel()
 
     override fun onCreateView(
@@ -35,7 +44,7 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        navController = Navigation.findNavController(requireActivity(), R.id.host_fragment)
         observeNotifyTrackingStatus()
         observeNotifyTrackingLiveData(0)
         initUi()
@@ -49,6 +58,8 @@ class HomeFragment : Fragment() {
             (it as ToggleButton)
             vm.setTrackingStatus(it.isChecked)
         }
+        setFilterButtonListener()
+        setInfoButtonListener()
     }
 
     private fun observeNotifyTrackingLiveData(filtration: Long) {
@@ -75,7 +86,13 @@ class HomeFragment : Fragment() {
     }
 
     private fun startSelectableModeListener(boolean: Boolean) {
-        (activity as MainActivity).endSelectableModeListener = ::endSelectableModeListener
+        vFilter.setImageDrawable(
+            ContextCompat.getDrawable(
+                requireActivity(),
+                R.drawable.ic_done_all
+            )
+        )
+        imInfo.visibility = View.GONE
     }
 
     private fun endSelectableModeListener(isDelete: Boolean) {
@@ -85,24 +102,18 @@ class HomeFragment : Fragment() {
             adapter.list.forEach { it.isChecked.set(false) }
         }
         adapter.isSelectableMode = false
-        (activity as MainActivity).endSelectableModeListener = null
+        vFilter.setImageDrawable(
+            ContextCompat.getDrawable(
+                requireActivity(),
+                R.drawable.ic_sort
+            )
+        )
+        imInfo.visibility = View.VISIBLE
     }
 
     private fun showEmptyScreen(isShow: Boolean) {
         binding.vEmptyScreen.visibility = if (isShow) View.VISIBLE else View.GONE
         binding.vNotificationList.visibility = if (isShow) View.GONE else View.VISIBLE
-    }
-
-    override fun onResume() {
-        super.onResume()
-        (activity as? MainActivity)?.filterUpdateListener = {
-            observeNotifyTrackingLiveData(it)
-        }
-    }
-
-    override fun onStop() {
-        super.onStop()
-        (activity as? MainActivity)?.filterUpdateListener = null
     }
 
     private fun startTracking() {
@@ -125,5 +136,70 @@ class HomeFragment : Fragment() {
                 NotificationTrackerService::class.java
             )
         )
+    }
+
+    private fun setFilterButtonListener() {
+        vFilter.setOnClickListener {
+            if (adapter.isSelectableMode) {
+                endSelectableModeListener(true)
+            } else {
+                showFilterMenu(it)
+            }
+        }
+    }
+
+    private fun setInfoButtonListener() {
+        imInfo.setOnClickListener {
+            showInfoMenu(it)
+        }
+    }
+
+    private fun showFilterMenu(v: View) {
+        val popupMenu = PopupMenu(requireActivity(), v)
+        popupMenu.inflate(R.menu.menu_filters)
+        popupMenu.menu.getItem(vm.filtration.ordinal).isChecked = true
+        popupMenu.setOnMenuItemClickListener { item ->
+            when (item.itemId) {
+                R.id.menuAllTime -> {
+                    vm.filtration = Filtration.ALL_TIME
+                }
+                R.id.menuPerHour -> {
+                    vm.filtration = Filtration.PER_HOUR
+                }
+                R.id.menuPerDay -> {
+                    vm.filtration = Filtration.PER_DAY
+                }
+                R.id.menuPerMonth -> {
+                    vm.filtration = Filtration.PER_MONTH
+                }
+            }
+            observeNotifyTrackingLiveData(vm.filtration.filterValue)
+            true
+        }
+        popupMenu.show()
+    }
+
+    private fun showInfoMenu(v: View) {
+        val popupMenu = PopupMenu(requireActivity(), v)
+        popupMenu.inflate(R.menu.menu_info)
+        popupMenu.menu.getItem(vm.filtration.ordinal).isChecked = true
+        popupMenu.setOnMenuItemClickListener { item ->
+            when (item.itemId) {
+                R.id.settingsFragment -> {
+                    NavigationUI.onNavDestinationSelected(item, navController)
+                }
+                R.id.menuChangePin -> {
+                    Utils.showToast(requireActivity(), "Coming soon")
+                }
+                R.id.menuPrivacyPolicy -> {
+                    UniversalDialog(getString(R.string.privacy_policy_text), null, null).show(this)
+                }
+                R.id.menuContactUs -> {
+                    Utils.sendEmail(requireActivity())
+                }
+            }
+            true
+        }
+        popupMenu.show()
     }
 }

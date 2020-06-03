@@ -44,4 +44,10 @@
     <string name="privacy_policy_text">Notification Tracker - does not collect any personal data, any data obtained while the application is running is stored in an encrypted database with a key based on your PIN-code and cannot be get by us. Contact us: if you have any questions about this Privacy Policy or different questions contact us: sosov.valeriy@gmail.com</string>
     <string name="contact_us_item">Contact us</string>
     <string name="change_pin_item">Change PIN</string>
+
+    <!-- SettingsFragment -->
+    <string name="is_show_removed">Is showing removed from bar</string>
+    <string name="settings_title">Settings</string>
+    <string name="save_button">Save</string>
+    <string name="changes_was_saved">Changes saved</string>
 </resources>
