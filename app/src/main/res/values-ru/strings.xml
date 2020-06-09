@@ -50,4 +50,5 @@
     <string name="settings_title">Настройки</string>
     <string name="save_button">Сохранить</string>
     <string name="changes_was_saved">Изменения сохранены</string>
+    <string name="ignore_packages_title">Не показывать приложения в списке</string>
 </resources>

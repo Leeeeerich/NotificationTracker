@@ -27,6 +27,11 @@ android {
                 output.outputFileName = "notification_tracker" + "." + flavor + "." + buildType + "." + getTime() + ".apk"
             }
         }
+        kapt {
+            arguments {
+                arg("room.schemaLocation", "$projectDir/schemas")
+            }
+        }
     }
     dataBinding {
         enabled = true
@@ -55,8 +60,8 @@ android {
         debug {
             minifyEnabled false
             signingConfig signingConfigs.debug
-            buildConfigField "String", "PIN_ALIAS", keystoreProperties['PIN_ALIAS']
-            buildConfigField "String", "DB_PASS_ALIAS", keystoreProperties['DB_PASS_ALIAS']
+            buildConfigField "String", "PIN_ALIAS", "\"1234\""
+            buildConfigField "String", "DB_PASS_ALIAS", "\"1234\""
         }
     }
     compileOptions {

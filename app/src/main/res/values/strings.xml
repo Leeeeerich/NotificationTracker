@@ -50,4 +50,5 @@
     <string name="settings_title">Settings</string>
     <string name="save_button">Save</string>
     <string name="changes_was_saved">Changes saved</string>
+    <string name="ignore_packages_title">Not show application in list</string>
 </resources>

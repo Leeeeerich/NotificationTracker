@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="ignoreAppVo"
+            type="com.guralnya.notification_tracker.model.models.vo.IgnoreAppVo" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/vIconApp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp"
+            android:maxWidth="24dp"
+            android:maxHeight="24dp"
+            android:src="@{ignoreAppVo.getAppIcon(context)}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="ContentDescription"
+            tools:src="@drawable/ic_no_notification" />
+
+        <TextView
+            android:id="@+id/tvAppName"
+            style="@style/TextStyleTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="4dp"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:text="@{ignoreAppVo.getAppName(context)}"
+            app:layout_constraintBottom_toTopOf="@+id/tvPackageName"
+            app:layout_constraintStart_toEndOf="@+id/vIconApp"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Viber" />
+
+        <TextView
+            android:id="@+id/tvPackageName"
+            style="@style/TextStyleTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:text="@{ignoreAppVo.getAppName(context)}"
+            app:layout_constraintBottom_toBottomOf="@id/tvAppName"
+            app:layout_constraintStart_toEndOf="@+id/vIconApp"
+            app:layout_constraintTop_toBottomOf="parent"
+            tools:text="com.mass.effect" />
+
+        <CheckBox
+            android:id="@+id/checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:checked="@={ignoreAppVo.isChecked}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

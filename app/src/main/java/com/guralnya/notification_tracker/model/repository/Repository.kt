@@ -1,7 +1,9 @@
 package com.guralnya.notification_tracker.model.repository
 
 import androidx.lifecycle.LiveData
+import com.guralnya.notification_tracker.model.models.IgnorePackage
 import com.guralnya.notification_tracker.model.models.NotifyInfo
+import com.guralnya.notification_tracker.model.models.vo.IgnoreAppVo
 
 interface Repository {
 
@@ -12,4 +14,9 @@ interface Repository {
     ): LiveData<List<NotifyInfo>>
 
     fun deleteNotifies(listDeletable: List<NotifyInfo>)
+
+    suspend fun insertIgnorePackages(ignorePackages: List<IgnorePackage>)
+    suspend fun deleteIgnorePackages(ignorePackages: List<IgnorePackage>)
+    suspend fun clearAndInsertIgnorePackages(ignorePackages: List<IgnorePackage>)
+    fun getIgnorePackagesWithIgnore(): List<IgnoreAppVo>
 }

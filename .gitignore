@@ -15,4 +15,4 @@
 .cxx
 keystore.properties
 
-/.github/*
+/app/schemas

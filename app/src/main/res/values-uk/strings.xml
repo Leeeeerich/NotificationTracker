@@ -50,4 +50,5 @@
     <string name="settings_title">Налаштування</string>
     <string name="save_button">Зберегти</string>
     <string name="changes_was_saved">Зміни збережено</string>
+    <string name="ignore_packages_title">Не показувати додатки у списку</string>
 </resources>

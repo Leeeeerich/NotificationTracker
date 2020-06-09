@@ -22,6 +22,6 @@ object DependencyInjector {
         viewModel { PinCodeViewModel(get()) }
         viewModel { MainViewModel() }
         viewModel { HomeViewModel(get(), get()) }
-        viewModel { SettingsViewModel(get()) }
+        viewModel { SettingsViewModel(get(), get()) }
     }
 }
