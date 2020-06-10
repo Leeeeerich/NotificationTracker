@@ -4,7 +4,6 @@
         <item name="colorPrimary">@android:color/white</item>
         <item name="colorPrimaryDark">@android:color/black</item>
         <item name="colorAccent">@android:color/black</item>
-        <item name="android:popupMenuStyle">@style/PopupMenuStyle</item>
     </style>
 
     <style name="TextStyleTitle" parent="TextAppearance.AppCompat.Large">
@@ -14,10 +13,6 @@
 
     <style name="TextStyleContent" parent="TextAppearance.AppCompat.Medium">
         <item name="android:textColor">@android:color/black</item>
-    </style>
-
-    <style name="PopupMenuStyle" parent="@android:style/Widget.PopupMenu">
-        <item name="android:backgroundTint">#54000000</item>
     </style>
 
     <style name="PinCodeNumberStyle" parent="TextAppearance.AppCompat.Large">
