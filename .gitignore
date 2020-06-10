@@ -14,5 +14,3 @@
 .externalNativeBuild
 .cxx
 keystore.properties
-
-/.github/*
