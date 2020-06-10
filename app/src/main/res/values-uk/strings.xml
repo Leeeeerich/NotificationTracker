@@ -46,7 +46,7 @@
     <string name="change_pin_item">Змінити PIN</string>
 
     <!-- SettingsFragment -->
-    <string name="is_show_removed">Приховувати записи коли видалена із шторки</string>
+    <string name="is_show_removed">Приховувати записи коли сповіщення видалено із шторки</string>
     <string name="settings_title">Налаштування</string>
     <string name="save_button">Зберегти</string>
     <string name="changes_was_saved">Зміни збережено</string>

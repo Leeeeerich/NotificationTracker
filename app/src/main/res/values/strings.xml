@@ -6,9 +6,9 @@
     <string name="stop_button">stop</string>
 
     <string name="all_title">All</string>
-    <string name="per_hour">Per hour</string>
-    <string name="per_day">Per day</string>
-    <string name="per_month">Per month</string>
+    <string name="per_hour">Last hour</string>
+    <string name="per_day">Last day</string>
+    <string name="per_month">Last month</string>
 
     <string name="notification_listener_service">Notification listener service</string>
     <string name="notification_listener_service_explanation">The application will record all incoming notifications and their removal from the curtain. To start tracking notifications, do you need to give permission, to continue?</string>
@@ -46,9 +46,9 @@
     <string name="change_pin_item">Change PIN</string>
 
     <!-- SettingsFragment -->
-    <string name="is_show_removed">Hide entries when deleted from the curtain</string>
+    <string name="is_show_removed">Hide entries when notice deleted from the curtain</string>
     <string name="settings_title">Settings</string>
     <string name="save_button">Save</string>
     <string name="changes_was_saved">Changes saved</string>
-    <string name="ignore_packages_title">Not show application in list</string>
+    <string name="ignore_packages_title">Not show applications in list</string>
 </resources>
