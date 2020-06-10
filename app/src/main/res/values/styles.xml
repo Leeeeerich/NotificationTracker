@@ -31,6 +31,7 @@
 
     <style name="SwitchStyle" parent="Widget.AppCompat.CompoundButton.Switch">
         <item name="android:background">@drawable/background_circle_with_ripple</item>
+        <item name="colorControlActivated">#000000</item>
         <item name="android:layout_marginTop">8dp</item>
         <item name="android:layout_marginStart">8dp</item>
         <item name="android:layout_marginEnd">8dp</item>

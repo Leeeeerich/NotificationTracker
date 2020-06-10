@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -28,14 +29,15 @@
 
             <Switch
                 android:id="@+id/swIsShowRemoved"
-                style="@style/SwitchStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:checked="@={settingsVo.isShowRemoved}"
                 android:text="@string/is_show_removed"
+                android:theme="@style/SwitchStyle"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/vToolbar" />
+                app:layout_constraintTop_toBottomOf="@+id/vToolbar"
+                tools:checked="true" />
 
             <TextView
                 android:id="@+id/textView"
