@@ -158,6 +158,8 @@ class HomeFragment : Fragment() {
         val popupMenu = PopupMenu(requireActivity(), v)
         popupMenu.inflate(R.menu.menu_filters)
         popupMenu.menu.getItem(vm.filtration.ordinal).isChecked = true
+        popupMenu.menu.findItem(R.id.menuIsEnabledPackageFilter).isChecked =
+            vm.getIsEnabledPackageFilter()
         popupMenu.setOnMenuItemClickListener { item ->
             when (item.itemId) {
                 R.id.menuAllTime -> {
@@ -171,6 +173,9 @@ class HomeFragment : Fragment() {
                 }
                 R.id.menuPerMonth -> {
                     vm.filtration = Filtration.PER_MONTH
+                }
+                R.id.menuIsEnabledPackageFilter -> {
+                    vm.setIsEnabledPackageFilter(!item.isChecked)
                 }
             }
             observeNotifyTrackingLiveData(vm.filtration.filterValue)

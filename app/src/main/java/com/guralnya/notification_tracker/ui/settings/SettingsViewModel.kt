@@ -18,13 +18,17 @@ class SettingsViewModel(
     private val repository: Repository
 ) : ViewModel() {
 
-    val settingsVo = SettingsVo(ObservableBoolean(preferencesManager.getIsShowRemoved()))
+    val settingsVo = SettingsVo(
+        ObservableBoolean(preferencesManager.getIsShowRemoved()),
+        ObservableBoolean(preferencesManager.getIsEnabledPackageFilter())
+    )
     private val ignorePackagesLiveData = MutableLiveData<List<IgnoreAppVo>>()
 
     fun getIgnorePackagesLiveData(): LiveData<List<IgnoreAppVo>> = ignorePackagesLiveData
 
     fun saveChanged(listIgnoreApp: List<IgnorePackage>) {
         preferencesManager.saveIsShowRemoved(settingsVo.isShowRemoved.get())
+        preferencesManager.saveIsEnabledPackageFilter(settingsVo.isEnabledPackageFilters.get())
         viewModelScope.launch(Dispatchers.IO) {
             repository.clearAndInsertIgnorePackages(listIgnoreApp)
         }

@@ -10,7 +10,8 @@ interface Repository {
     suspend fun insertNewNotify(notifyInfo: NotifyInfo)
     fun getAllNotify(
         filterDateTime: String = "0",
-        isGetRemoved: Boolean = true
+        isGetRemoved: Boolean,
+        isEnabledPackageFilter: Boolean
     ): LiveData<List<NotifyInfo>>
 
     fun deleteNotifies(listDeletable: List<NotifyInfo>)

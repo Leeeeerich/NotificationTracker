@@ -12,6 +12,7 @@ class PreferencesManagerImpl(private val context: Context) :
         private const val PIN_CODE = "pin_code"
         private const val DB_PASS = "db_pass"
         private const val IS_SHOW_REMOVED = "is_show_removed"
+        private const val IS_ENABLED_PACKAGE_FILTER = "is_enabled_package_filter"
     }
 
     private fun getPreferences(): SharedPreferences =
@@ -53,5 +54,12 @@ class PreferencesManagerImpl(private val context: Context) :
 
     override fun saveIsShowRemoved(isShow: Boolean) {
         getPreferences().edit().putBoolean(IS_SHOW_REMOVED, isShow).apply()
+    }
+
+    override fun getIsEnabledPackageFilter(): Boolean =
+        getPreferences().getBoolean(IS_ENABLED_PACKAGE_FILTER, true)
+
+    override fun saveIsEnabledPackageFilter(isEnabled: Boolean) {
+        getPreferences().edit().putBoolean(IS_ENABLED_PACKAGE_FILTER, isEnabled).apply()
     }
 }

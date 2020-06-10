@@ -28,4 +28,8 @@ data class IgnoreAppVo(
     fun getAppName(context: Context) =
         getAppInfo(context)?.let { context.packageManager.getApplicationLabel(it) }
             ?: "(Unknown app)"
+
+    fun changeCheckedListener() {
+        isChecked.set(!isChecked.get())
+    }
 }

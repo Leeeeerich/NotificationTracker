@@ -51,4 +51,5 @@
     <string name="save_button">Зберегти</string>
     <string name="changes_was_saved">Зміни збережено</string>
     <string name="ignore_packages_title">Не показувати додатки у списку</string>
+    <string name="enabled_package_filter_title">Увімкнути фільтрування по додаткам</string>
 </resources>

@@ -22,7 +22,8 @@ class HomeViewModel(
     fun getNotificationsLiveData(filterMilliseconds: Long) =
         repository.getAllNotify(
             filterMilliseconds.toString(),
-            preferencesManager.getIsShowRemoved()
+            preferencesManager.getIsShowRemoved(),
+            preferencesManager.getIsEnabledPackageFilter()
         )
 
     fun getTrackingStatus(): LiveData<Boolean> = trackingStatusLiveData
@@ -30,6 +31,12 @@ class HomeViewModel(
     fun setTrackingStatus(isTracking: Boolean) {
         preferencesManager.saveTrackingStatus(isTracking) //TODO redo to getting liveData from preferences
         trackingStatusLiveData.postValue(isTracking)
+    }
+
+    fun getIsEnabledPackageFilter() = preferencesManager.getIsEnabledPackageFilter()
+
+    fun setIsEnabledPackageFilter(isEnabled: Boolean) {
+        preferencesManager.saveIsEnabledPackageFilter(isEnabled)
     }
 
     fun deleteNotifies(listDeletable: List<NotifyInfo>) {

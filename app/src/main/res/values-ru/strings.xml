@@ -51,4 +51,5 @@
     <string name="save_button">Сохранить</string>
     <string name="changes_was_saved">Изменения сохранены</string>
     <string name="ignore_packages_title">Не показывать приложения в списке</string>
+    <string name="enabled_package_filter_title">Включить фильтрацию по приложениям</string>
 </resources>

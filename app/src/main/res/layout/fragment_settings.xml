@@ -31,6 +31,8 @@
                 android:id="@+id/swIsShowRemoved"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
                 android:checked="@={settingsVo.isShowRemoved}"
                 android:text="@string/is_show_removed"
                 android:theme="@style/SwitchStyle"
@@ -42,12 +44,35 @@
             <TextView
                 android:id="@+id/textView"
                 style="@style/BlocTitleTextStyle"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="?android:attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
+                android:onClick="@{()->settingsVo.enabledPackageFilterListener()}"
+                android:padding="16dp"
+                android:paddingEnd="36dp"
                 android:text="@string/ignore_packages_title"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_chainStyle="packed"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/swIsShowRemoved" />
+                app:layout_constraintTop_toBottomOf="@+id/swIsShowRemoved"
+                tools:ignore="RtlSymmetry" />
+
+            <CheckBox
+                android:id="@+id/cbIsEnabledPackageFilters"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="@{settingsVo.isEnabledPackageFilters()}"
+                android:clickable="false"
+                android:focusable="false"
+                android:gravity="center"
+                app:layout_constraintBottom_toBottomOf="@+id/textView"
+                app:layout_constraintEnd_toEndOf="@+id/textView"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintTop_toTopOf="@+id/textView"
+                app:layout_constraintVertical_bias="0.5" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvIgnorePackages"

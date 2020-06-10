@@ -12,17 +12,20 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/background_circle_with_ripple"
+        android:clickable="true"
+        android:focusable="true"
+        android:onClick="@{() -> ignoreAppVo.changeCheckedListener()}"
+        android:padding="8dp">
 
         <ImageView
             android:id="@+id/vIconApp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="4dp"
-            android:layout_marginBottom="4dp"
-            android:maxWidth="24dp"
-            android:maxHeight="24dp"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:src="@{ignoreAppVo.getAppIcon(context)}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -47,16 +50,17 @@
 
         <TextView
             android:id="@+id/tvPackageName"
-            style="@style/TextStyleTitle"
+            style="@style/TextStyleOther"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
             android:ellipsize="end"
             android:maxLines="2"
-            android:text="@{ignoreAppVo.getAppName(context)}"
+            android:text="@{ignoreAppVo.appPackageName}"
             app:layout_constraintBottom_toBottomOf="@id/tvAppName"
-            app:layout_constraintStart_toEndOf="@+id/vIconApp"
+            app:layout_constraintEnd_toStartOf="@+id/checkbox"
+            app:layout_constraintStart_toStartOf="@+id/tvAppName"
             app:layout_constraintTop_toBottomOf="parent"
             tools:text="com.mass.effect" />
 
@@ -65,7 +69,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
-            android:checked="@={ignoreAppVo.isChecked}"
+            android:checked="@{ignoreAppVo.isChecked}"
+            android:clickable="false"
+            android:focusable="false"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

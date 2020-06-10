@@ -13,4 +13,7 @@ interface PreferencesManager {
 
     fun getIsShowRemoved(): Boolean
     fun saveIsShowRemoved(isShow: Boolean)
+
+    fun getIsEnabledPackageFilter(): Boolean
+    fun saveIsEnabledPackageFilter(isEnabled: Boolean)
 }
