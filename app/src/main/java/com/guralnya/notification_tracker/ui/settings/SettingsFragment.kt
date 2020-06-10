@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
 import com.guralnya.notification_tracker.R
 import com.guralnya.notification_tracker.databinding.FragmentSettingsBinding
 import com.guralnya.notification_tracker.model.models.IgnorePackage
@@ -19,6 +21,7 @@ class SettingsFragment : Fragment() {
 
     private lateinit var binding: FragmentSettingsBinding
     private lateinit var packagesIgnoreAdapter: ApplicationAdapter
+    private lateinit var navController: NavController
     private val vm: SettingsViewModel by viewModel()
 
     override fun onCreateView(
@@ -32,6 +35,7 @@ class SettingsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        navController = Navigation.findNavController(requireActivity(), R.id.host_fragment)
         binding.settingsVo = vm.settingsVo
 
         packagesIgnoreAdapter = ApplicationAdapter()
@@ -57,6 +61,7 @@ class SettingsFragment : Fragment() {
                 .forEach { ignorePackages.add(IgnorePackage(it.appPackageName)) }
             vm.saveChanged(ignorePackages)
             Utils.showToast(requireActivity(), R.string.changes_was_saved)
+            navController.popBackStack()
         }
     }
 }
