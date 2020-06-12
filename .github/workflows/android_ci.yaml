@@ -24,10 +24,6 @@ jobs:
       - name: Output version code
         run: echo VERSION_CODE=${{ github.run_number }} > ./version.properties
       - name: Build with Gradle
-        #      uses: eskatos/gradle-command-action@v1
-        #      with:
-        #        gradle-version: 3.6.3
-        #        arguments: build
         run: ./gradlew assemble
         env:
           RELEASE_STORE_PASSWORD: ${{ secrets.RELEASE_STORE_PASSWORD }}
@@ -39,32 +35,13 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: notification_tracker
-          path: app/build/outputs/apk/release/notification_tracker.release.*.apk
+          path: app/build/outputs/apk/release/notification_tracker.release.apk
       - name: Upload to PlayMarket
         uses: r0adkll/upload-google-play@v1
         with:
           serviceAccountJsonPlainText: ${{ secrets.SERVICE_ACCOUNT_JSON }}
           packageName: com.guralnya.notification_tracker
-          releaseFile: app/build/outputs/apk/release/notification_tracker.release.*.apk
+          releaseFile: app/build/outputs/apk/release/notification_tracker.release.apk
           track: beta
           userFraction: 0.33
           whatsNewDirectory: distribution/whatsnew
-#  deploy:
-#    name: Deploy to PlayMarket
-#    needs: [build]
-#    runs-on: ubuntu-latest
-#    steps:
-#    - uses: actions/checkout@v2
-#    - name: Get appbundle from artifacts
-#      uses: actions/download-artifact@v1
-#      with:
-#        name: notification_tracker
-#    - name: Upload to PlayMarket
-#      uses: r0adkll/upload-google-play@v1
-#      with:
-#        serviceAccountJson: ${{ secrets.SERVICE_ACCOUNT_JSON }}
-#        packageName: com.guralnya.notification_tracker
-#        releaseFile: notification_tracker.release.apk
-#        track: beta
-#        userFraction: 0.33
-#        whatsNewDirectory: /distribution/whatsnew
