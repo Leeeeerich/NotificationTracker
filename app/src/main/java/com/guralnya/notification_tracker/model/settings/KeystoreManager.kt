@@ -72,7 +72,7 @@ class KeystoreManager(private val context: Context, private val preferences: Pre
                     ANDROID_KEY_STORE
                 )
                 generator.initialize(spec)
-                val generateKeyPair = generator.generateKeyPair()
+                generator.generateKeyPair()
             }
         } catch (e: Exception) {
             //TODO: Add log

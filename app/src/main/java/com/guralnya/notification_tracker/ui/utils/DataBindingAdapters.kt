@@ -8,13 +8,13 @@ object DataBindingAdapters {
 
     @BindingAdapter("app:time")
     @JvmStatic
-    fun time(view: TextView, value: DateTime?) {
-        view.setText(value?.getFormattedTime())
+    fun time(view: TextView?, value: DateTime?) {
+        view?.text = value?.getFormattedTime()
     }
 
     @BindingAdapter("app:date")
     @JvmStatic
-    fun date(view: TextView, value: DateTime?) {
-        view.setText(value?.getFormattedDate())
+    fun date(view: TextView?, value: DateTime?) {
+        view?.text = value?.getFormattedDate()
     }
 }

@@ -85,7 +85,7 @@ class HomeFragment : Fragment() {
         })
     }
 
-    private fun startSelectableModeListener(boolean: Boolean) {
+    private fun startSelectableModeListener() {
         vFilter.setImageDrawable(
             ContextCompat.getDrawable(
                 requireActivity(),
@@ -95,12 +95,8 @@ class HomeFragment : Fragment() {
         imInfo.visibility = View.GONE
     }
 
-    private fun endSelectableModeListener(isDelete: Boolean) {
-        if (isDelete) {
-            vm.deleteNotifies(adapter.list.filter { it.isChecked.get() })
-        } else {
-            adapter.list.forEach { it.isChecked.set(false) }
-        }
+    private fun endSelectableModeListener() {
+        vm.deleteNotifies(adapter.list.filter { it.isChecked.get() })
         adapter.isSelectableMode = false
         vFilter.setImageDrawable(
             ContextCompat.getDrawable(
@@ -141,7 +137,7 @@ class HomeFragment : Fragment() {
     private fun setFilterButtonListener() {
         vFilter.setOnClickListener {
             if (adapter.isSelectableMode) {
-                endSelectableModeListener(true)
+                endSelectableModeListener()
             } else {
                 showFilterMenu(it)
             }

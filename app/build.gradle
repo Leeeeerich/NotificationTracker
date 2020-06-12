@@ -3,9 +3,32 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
-def keystorePropertiesFile = rootProject.file("keystore.properties")
+def release_store_password
+def release_key_password
+def release_key_alias
+def pin_alias
+def db_pass_alias
+
 def keystoreProperties = new Properties()
-keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+if (rootProject.file("keystore.properties").exists()) {
+    keystoreProperties.load(new FileInputStream(rootProject.file("keystore.properties")))
+    release_store_password = keystoreProperties['RELEASE_STORE_PASSWORD']
+    release_key_password = keystoreProperties['RELEASE_KEY_PASSWORD']
+    release_key_alias = keystoreProperties['RELEASE_KEY_ALIAS']
+    pin_alias = keystoreProperties['PIN_ALIAS']
+    db_pass_alias = keystoreProperties['DB_PASS_ALIAS']
+} else {
+    release_store_password = System.env.RELEASE_STORE_PASSWORD
+    release_key_password = System.env.RELEASE_KEY_PASSWORD
+    release_key_alias = System.env.RELEASE_KEY_ALIAS
+    pin_alias = System.env.PIN_ALIAS
+    db_pass_alias = System.env.DB_PASS_ALIAS
+}
+
+def versionPropsFile = rootProject.file('version.properties')
+Properties versionProps = new Properties()
+versionProps.load(new FileInputStream(versionPropsFile))
+def verCode = versionProps['VERSION_CODE'].toInteger()
 
 android {
     compileSdkVersion 29
@@ -15,16 +38,15 @@ android {
         applicationId "com.guralnya.notification_tracker"
         minSdkVersion 23
         targetSdkVersion 29
-        versionCode 4
-        versionName "1.1.1"
+        versionCode verCode
+        versionName "1.1.$verCode"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         applicationVariants.all { variant ->
             variant.outputs.each { output ->
                 def buildType = variant.buildType.name
-                def flavor = variant.flavorName
-                output.outputFileName = "notification_tracker" + "." + flavor + "." + buildType + "." + getTime() + ".apk"
+                output.outputFileName = "notification_tracker" + "." + buildType + "." + getTime() + ".apk"
             }
         }
         kapt {
@@ -40,9 +62,9 @@ android {
     signingConfigs {
         release {
             storeFile file("../NotificationTracker.jks")
-            storePassword keystoreProperties['RELEASE_STORE_PASSWORD']
-            keyAlias keystoreProperties['RELEASE_KEY_ALIAS']
-            keyPassword keystoreProperties['RELEASE_KEY_PASSWORD']
+            storePassword = release_store_password
+            keyAlias = release_key_alias
+            keyPassword = release_key_password
         }
         debug {
             storeFile file('../debug.keystore')
@@ -54,8 +76,8 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             minifyEnabled false
             signingConfig signingConfigs.release
-            buildConfigField "String", "PIN_ALIAS", keystoreProperties['PIN_ALIAS']
-            buildConfigField "String", "DB_PASS_ALIAS", keystoreProperties['DB_PASS_ALIAS']
+            buildConfigField "String", "PIN_ALIAS", "\"$pin_alias\""
+            buildConfigField "String", "DB_PASS_ALIAS", "\"$db_pass_alias\""
         }
         debug {
             minifyEnabled false
