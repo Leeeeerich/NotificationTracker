@@ -54,7 +54,7 @@ android {
                 arg("room.schemaLocation", "$projectDir/schemas")
             }
         }
-        ndkVersion "major.minor.build"
+        ndkVersion DEFAULT_VERSION
     }
     dataBinding {
         enabled = true
