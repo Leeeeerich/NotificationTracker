@@ -33,6 +33,7 @@ def verCode = versionProps['VERSION_CODE'].toInteger()
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.3"
+    ndkVersion 'major.minor.build'
 
     defaultConfig {
         applicationId "com.guralnya.notification_tracker"
@@ -54,8 +55,8 @@ android {
                 arg("room.schemaLocation", "$projectDir/schemas")
             }
         }
-        ndkVersion 'major.minor.build'
     }
+
     dataBinding {
         enabled = true
     }
