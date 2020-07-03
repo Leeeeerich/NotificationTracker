@@ -174,7 +174,11 @@ class HomeFragment : Fragment() {
                     vm.setIsEnabledPackageFilter(!item.isChecked)
                 }
             }
-            observeNotifyTrackingLiveData(vm.filtration.filterValue)
+            observeNotifyTrackingLiveData(vm.filtration.getTimeFiltration(vm.filtration))
+            Log.e(
+                "Filtration",
+                "Filtration time = ${vm.filtration.getTimeFiltration(vm.filtration)}"
+            )
             true
         }
         popupMenu.show()
