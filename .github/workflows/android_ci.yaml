@@ -43,5 +43,5 @@ jobs:
           packageName: com.guralnya.notification_tracker
           releaseFile: app/build/outputs/apk/release/notification_tracker.release.apk
           track: beta
-          userFraction: 1
+          userFraction: 1.0
           whatsNewDirectory: distribution/whatsnew
