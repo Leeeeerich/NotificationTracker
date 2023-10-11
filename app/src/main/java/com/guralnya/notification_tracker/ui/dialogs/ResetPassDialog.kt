@@ -9,32 +9,36 @@ import android.view.Window
 import android.widget.Button
 import android.widget.FrameLayout
 import android.widget.TextView
+import androidx.databinding.DataBindingUtil
 import com.eshmun.mobile.ui.dialogs.BaseFullscreenDialog
 import com.guralnya.notification_tracker.R
-import kotlinx.android.synthetic.main.dialog_reset_pass.*
+import com.guralnya.notification_tracker.databinding.DialogResetPassBinding
 
-class ResetPassDialog(private val message: String, private val positiveCallBack: (() -> Unit)?) : BaseFullscreenDialog() {
+class ResetPassDialog(private val message: String, private val positiveCallBack: (() -> Unit)?) :
+    BaseFullscreenDialog() {
+    private lateinit var binding: DialogResetPassBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.dialog_reset_pass, container, false)
+    ): View {
+        binding = DataBindingUtil.inflate(inflater, R.layout.dialog_reset_pass, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         isCancelable = true
 
-        tvTextDialog.text = message
+        binding.tvTextDialog.text = message
 
         view.findViewById<FrameLayout>(R.id.flBackgroundDialog).setOnClickListener {
             dismiss()
         }
 
         positiveCallBack?.let {
-            btOkay.visibility = View.VISIBLE
+            binding.btOkay.visibility = View.VISIBLE
             view.findViewById<Button>(R.id.btOkay).setOnClickListener {
                 positiveCallBack.invoke()
                 dismiss()

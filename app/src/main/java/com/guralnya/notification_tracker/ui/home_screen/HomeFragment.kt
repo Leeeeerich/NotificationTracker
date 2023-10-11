@@ -14,6 +14,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
 import com.guralnya.notification_tracker.R
 import com.guralnya.notification_tracker.databinding.FragmentHomeBinding
@@ -23,8 +24,7 @@ import com.guralnya.notification_tracker.ui.dialogs.UniversalDialog
 import com.guralnya.notification_tracker.ui.utils.Utils
 import com.guralnya.notification_tracker.ui.utils.Utils.buildNotificationServiceAlertDialog
 import com.guralnya.notification_tracker.ui.utils.Utils.isNotificationServiceEnabled
-import kotlinx.android.synthetic.main.toolbar_with_sorting_button.*
-import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HomeFragment : Fragment() {
 
@@ -37,14 +37,14 @@ class HomeFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        navController = Navigation.findNavController(requireActivity(), R.id.host_fragment)
+        navController = findNavController()
         observeNotifyTrackingStatus()
         observeNotifyTrackingLiveData(0)
         initUi()
@@ -86,25 +86,25 @@ class HomeFragment : Fragment() {
     }
 
     private fun startSelectableModeListener() {
-        vFilter.setImageDrawable(
+        binding.vToolbar.vFilter.setImageDrawable(
             ContextCompat.getDrawable(
                 requireActivity(),
                 R.drawable.ic_done_all
             )
         )
-        imInfo.visibility = View.GONE
+        binding.vToolbar.imInfo.visibility = View.GONE
     }
 
     private fun endSelectableModeListener() {
         vm.deleteNotifies(adapter.list.filter { it.isChecked.get() })
         adapter.isSelectableMode = false
-        vFilter.setImageDrawable(
+        binding.vToolbar.vFilter.setImageDrawable(
             ContextCompat.getDrawable(
                 requireActivity(),
                 R.drawable.ic_sort
             )
         )
-        imInfo.visibility = View.VISIBLE
+        binding.vToolbar.imInfo.visibility = View.VISIBLE
     }
 
     private fun showEmptyScreen(isShow: Boolean) {
@@ -135,7 +135,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun setFilterButtonListener() {
-        vFilter.setOnClickListener {
+        binding.vToolbar.vFilter.setOnClickListener {
             if (adapter.isSelectableMode) {
                 endSelectableModeListener()
             } else {
@@ -145,7 +145,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun setInfoButtonListener() {
-        imInfo.setOnClickListener {
+        binding.vToolbar.imInfo.setOnClickListener {
             showInfoMenu(it)
         }
     }
@@ -161,15 +161,19 @@ class HomeFragment : Fragment() {
                 R.id.menuAllTime -> {
                     vm.filtration = Filtration.ALL_TIME
                 }
+
                 R.id.menuPerHour -> {
                     vm.filtration = Filtration.PER_HOUR
                 }
+
                 R.id.menuPerDay -> {
                     vm.filtration = Filtration.PER_DAY
                 }
+
                 R.id.menuPerMonth -> {
                     vm.filtration = Filtration.PER_MONTH
                 }
+
                 R.id.menuIsEnabledPackageFilter -> {
                     vm.setIsEnabledPackageFilter(!item.isChecked)
                 }
@@ -193,12 +197,15 @@ class HomeFragment : Fragment() {
                 R.id.settingsFragment -> {
                     NavigationUI.onNavDestinationSelected(item, navController)
                 }
+
                 R.id.menuChangePin -> {
                     Utils.showToast(requireActivity(), "Coming soon")
                 }
+
                 R.id.menuPrivacyPolicy -> {
                     UniversalDialog(getString(R.string.privacy_policy_text), null, null).show(this)
                 }
+
                 R.id.menuContactUs -> {
                     Utils.sendEmail(requireActivity())
                 }

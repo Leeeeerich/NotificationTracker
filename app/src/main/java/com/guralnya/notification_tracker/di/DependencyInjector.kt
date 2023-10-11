@@ -9,8 +9,8 @@ import com.guralnya.notification_tracker.ui.MainViewModel
 import com.guralnya.notification_tracker.ui.home_screen.HomeViewModel
 import com.guralnya.notification_tracker.ui.pin_code.PinCodeViewModel
 import com.guralnya.notification_tracker.ui.settings.SettingsViewModel
-import org.koin.android.viewmodel.ext.koin.viewModel
-import org.koin.dsl.module.module
+import org.koin.androidx.viewmodel.dsl.viewModel
+import org.koin.dsl.module
 
 object DependencyInjector {
 

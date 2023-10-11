@@ -7,8 +7,8 @@ import android.os.Build
 import android.util.Log
 import com.guralnya.notification_tracker.model.services.NotificationTrackerService
 import com.guralnya.notification_tracker.model.settings.PreferencesManager
-import org.koin.standalone.KoinComponent
-import org.koin.standalone.inject
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 
 class RebootReceiver : BroadcastReceiver(), KoinComponent {
 

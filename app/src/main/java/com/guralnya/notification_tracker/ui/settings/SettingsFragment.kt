@@ -13,9 +13,7 @@ import com.guralnya.notification_tracker.R
 import com.guralnya.notification_tracker.databinding.FragmentSettingsBinding
 import com.guralnya.notification_tracker.model.models.IgnorePackage
 import com.guralnya.notification_tracker.ui.utils.Utils
-import kotlinx.android.synthetic.main.fragment_settings.*
-import kotlinx.android.synthetic.main.toolbar_save_button.view.*
-import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SettingsFragment : Fragment() {
 
@@ -28,7 +26,7 @@ class SettingsFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_settings, container, false)
         return binding.root
     }
@@ -39,7 +37,7 @@ class SettingsFragment : Fragment() {
         binding.settingsVo = vm.settingsVo
 
         packagesIgnoreAdapter = ApplicationAdapter()
-        rvIgnorePackages.adapter = packagesIgnoreAdapter
+        binding.rvIgnorePackages.adapter = packagesIgnoreAdapter
 
         observeListPackagesWithIgnoreVo()
         setSaveChangedListener()

@@ -18,7 +18,7 @@ import com.guralnya.notification_tracker.R
 import com.guralnya.notification_tracker.databinding.ActivityPinCodeBinding
 import com.guralnya.notification_tracker.ui.MainActivity
 import com.guralnya.notification_tracker.ui.dialogs.ResetPassDialog
-import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class PinCodeActivity : AppCompatActivity() {
 
@@ -206,6 +206,7 @@ class PinCodeActivity : AppCompatActivity() {
         )
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == RESET_PIN_REQUEST_CODE) {
