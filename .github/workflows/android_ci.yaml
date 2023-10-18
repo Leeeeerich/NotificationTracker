@@ -24,8 +24,6 @@ jobs:
       #      run: chmod +x ./gradlew
       - name: Output version code
         run: echo VERSION_CODE=${{ github.run_number }} > ./version.properties
-      - name: vvv
-        run: echo ./version.properties
       - name: Build with Gradle
         run: ./gradlew assemble
         env:
@@ -39,8 +37,6 @@ jobs:
 #        with:
 #          name: notification_tracker
 #          path: app/build/outputs/bundle/release/notification_tracker.release.aab
-#      - name: vvv2
-#        run: echo app/build/outputs/bundle/release/notification_tracker-v${{ VERSION_CODE }}-release.aab
       - name: Upload to PlayMarket
         uses: r0adkll/upload-google-play@v1
         with:
