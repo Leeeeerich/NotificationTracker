@@ -36,7 +36,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: notification_tracker
-          path: app/build/outputs/apk/release/notification_tracker.release.apk
+          path: ./notification_tracker.release.apk
       - name: Upload to PlayMarket
         uses: r0adkll/upload-google-play@v1
         with:
