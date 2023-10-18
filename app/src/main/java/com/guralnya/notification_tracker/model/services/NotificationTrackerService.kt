@@ -52,7 +52,7 @@ class NotificationTrackerService : NotificationListenerService() {
                         id = 0,
                         notifyId = sbn.id,
                         appPackageName = sbn.packageName,
-                        notifyText = sbn.notification.tickerText?.toString() ?: "",
+                        notifyText = sbn.notification.tickerText?.toString() ?: getString(R.string.no_notification_message),
                         isAdding = true,
                         dateTimeShow = DateTime(sbn.notification.`when`)
                     )
@@ -70,7 +70,7 @@ class NotificationTrackerService : NotificationListenerService() {
                         id = 0,
                         notifyId = sbn.id,
                         appPackageName = sbn.packageName,
-                        notifyText = sbn.notification.tickerText?.toString() ?: "",
+                        notifyText = sbn.notification.tickerText?.toString() ?: getString(R.string.no_notification_message),
                         isAdding = false,
                         dateTimeShow = DateTime(sbn.notification.`when`)
                     )

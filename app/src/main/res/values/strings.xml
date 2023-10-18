@@ -45,6 +45,8 @@
     <string name="contact_us_item">Contact us</string>
     <string name="change_pin_item">Change PIN</string>
 
+    <string name="no_notification_message">(No message)</string>
+
     <!-- SettingsFragment -->
     <string name="is_show_removed">Hide entries when notice deleted from the curtain</string>
     <string name="settings_title">Settings</string>
