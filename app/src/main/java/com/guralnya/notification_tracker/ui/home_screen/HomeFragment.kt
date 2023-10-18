@@ -1,6 +1,5 @@
 package com.guralnya.notification_tracker.ui.home_screen
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -13,7 +12,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.NavController
-import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
 import com.guralnya.notification_tracker.R
@@ -113,25 +111,15 @@ class HomeFragment : Fragment() {
     }
 
     private fun startTracking() {
-        requireActivity().startService(
-            Intent(
-                requireContext(),
-                NotificationTrackerService::class.java
-            )
-        )
+        NotificationTrackerService.startService(requireActivity())
 
-        if (!isNotificationServiceEnabled(requireContext())) {
+        if (!isNotificationServiceEnabled(requireContext())) { //todo chicken and egg problem
             buildNotificationServiceAlertDialog(requireActivity()).show()
         }
     }
 
     private fun stopTracking() {
-        requireActivity().startService(
-            Intent(
-                requireContext(),
-                NotificationTrackerService::class.java
-            )
-        )
+        NotificationTrackerService.stopService(requireActivity())
     }
 
     private fun setFilterButtonListener() {
