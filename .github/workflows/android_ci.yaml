@@ -37,6 +37,10 @@ jobs:
 #        with:
 #          name: notification_tracker
 #          path: app/build/outputs/bundle/release/notification_tracker.release.aab
+      - name: Get APPBUNDLE from Artifacts
+        uses: actions/download-artifact@v2
+        with:
+          name: APPBUNDLE
       - name: Upload to PlayMarket
         uses: r0adkll/upload-google-play@v1
         with:
