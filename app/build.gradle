@@ -44,7 +44,7 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
-        applicationVariants.all { variant ->
+        applicationVariants.configureEach { variant ->
             variant.outputs.each { output ->
                 def buildType = variant.buildType.name
                 output.outputFileName = "notification_tracker" + "." + buildType + ".apk"

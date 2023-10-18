@@ -25,18 +25,18 @@ jobs:
       - name: Output version code
         run: echo VERSION_CODE=${{ github.run_number }} > ./version.properties
       - name: Build with Gradle
-        run: ./gradlew build
+        run: ./gradlew assemble
         env:
           RELEASE_STORE_PASSWORD: ${{ secrets.RELEASE_STORE_PASSWORD }}
           RELEASE_KEY_PASSWORD: ${{ secrets.RELEASE_KEY_PASSWORD }}
           RELEASE_KEY_ALIAS: ${{ secrets.RELEASE_KEY_ALIAS }}
           PIN_ALIAS: ${{ secrets.PIN_ALIAS }}
           DB_PASS_ALIAS: ${{ secrets.DB_PASS_ALIAS }}
-      - name: Upload APK
-        uses: actions/upload-artifact@v3
-        with:
-          name: notification_tracker
-          path: ./notification_tracker.release.apk
+#      - name: Upload APK
+#        uses: actions/upload-artifact@v3
+#        with:
+#          name: notification_tracker
+#          path: app/build/outputs/apk/release/notification_tracker.release.apk
       - name: Upload to PlayMarket
         uses: r0adkll/upload-google-play@v1
         with:
