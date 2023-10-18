@@ -25,7 +25,7 @@ jobs:
       - name: Output version code
         run: echo VERSION_CODE=${{ github.run_number }} > ./version.properties
       - name: Build with Gradle
-        run: ./gradlew assemble
+        run: ./gradlew build -release
         env:
           RELEASE_STORE_PASSWORD: ${{ secrets.RELEASE_STORE_PASSWORD }}
           RELEASE_KEY_PASSWORD: ${{ secrets.RELEASE_KEY_PASSWORD }}
