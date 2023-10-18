@@ -42,6 +42,6 @@ jobs:
         with:
           serviceAccountJsonPlainText: ${{ secrets.SERVICE_ACCOUNT_JSON }}
           packageName: com.guralnya.notification_tracker
-          releaseFile: notify.aab
+          releaseFile: app/build/outputs/bundle/release/app-release.aab
           track: beta
           whatsNewDirectory: distribution/whatsnew
