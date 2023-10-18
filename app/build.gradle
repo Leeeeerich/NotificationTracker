@@ -41,7 +41,7 @@ android {
         targetSdkVersion 34
         versionCode verCode
         versionName "1.1.$verCode"
-        setProperty("archivesBaseName", "notification_tracker-v" + verCode)
+        setProperty("archivesBaseName", "notify")
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
