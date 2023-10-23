@@ -18,6 +18,7 @@ abstract class BaseFullscreenDialog : DialogFragment() {
             requestFeature(Window.FEATURE_NO_TITLE)
             setDimAmount(0.2f)
         }
+        super.onViewCreated(view, savedInstanceState)
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
